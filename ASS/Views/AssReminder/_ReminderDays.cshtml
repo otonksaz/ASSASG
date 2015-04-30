@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ASS.Models.ViewReminderDays>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Unit</th>
+            <th>Complaint</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dtl in Model) { 
+        <tr>
+            <td>@dtl.descs</td>
+            <td>@dtl.countUnit</td>
+            <td>@dtl.countComplaint</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@Scripts.Render("~/bundles/bootstrap")

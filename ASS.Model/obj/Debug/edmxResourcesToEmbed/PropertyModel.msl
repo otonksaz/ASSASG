@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="POM_Property_DasanaModelStoreContainer" CdmEntityContainer="POM_Property_DasanaEntities">
+    <EntitySetMapping Name="cf_business">
+      <EntityTypeMapping TypeName="POM_Property_DasanaModel.cf_business">
+        <MappingFragment StoreEntitySet="cf_business">
+          <ScalarProperty Name="business_id" ColumnName="business_id" />
+          <ScalarProperty Name="class_cd" ColumnName="class_cd" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="salutation" ColumnName="salutation" />
+          <ScalarProperty Name="address1" ColumnName="address1" />
+          <ScalarProperty Name="address2" ColumnName="address2" />
+          <ScalarProperty Name="address3" ColumnName="address3" />
+          <ScalarProperty Name="post_cd" ColumnName="post_cd" />
+          <ScalarProperty Name="tel_no" ColumnName="tel_no" />
+          <ScalarProperty Name="hand_phone" ColumnName="hand_phone" />
+          <ScalarProperty Name="fax_no" ColumnName="fax_no" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+          <ScalarProperty Name="nationality" ColumnName="nationality" />
+          <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+          <ScalarProperty Name="income_tax" ColumnName="income_tax" />
+          <ScalarProperty Name="mail_type" ColumnName="mail_type" />
+          <ScalarProperty Name="mail_addr1" ColumnName="mail_addr1" />
+          <ScalarProperty Name="mail_addr2" ColumnName="mail_addr2" />
+          <ScalarProperty Name="mail_addr3" ColumnName="mail_addr3" />
+          <ScalarProperty Name="mail_post_cd" ColumnName="mail_post_cd" />
+          <ScalarProperty Name="co_name" ColumnName="co_name" />
+          <ScalarProperty Name="co_addr1" ColumnName="co_addr1" />
+          <ScalarProperty Name="co_addr2" ColumnName="co_addr2" />
+          <ScalarProperty Name="co_addr3" ColumnName="co_addr3" />
+          <ScalarProperty Name="co_post_cd" ColumnName="co_post_cd" />
+          <ScalarProperty Name="co_tel_no" ColumnName="co_tel_no" />
+          <ScalarProperty Name="co_fax_no" ColumnName="co_fax_no" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+          <ScalarProperty Name="statement_type" ColumnName="statement_type" />
+          <ScalarProperty Name="interest" ColumnName="interest" />
+          <ScalarProperty Name="reminder" ColumnName="reminder" />
+          <ScalarProperty Name="credit_terms" ColumnName="credit_terms" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="audit_user" ColumnName="audit_user" />
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="religion_cd" ColumnName="religion_cd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rl_sales">
+      <EntityTypeMapping TypeName="POM_Property_DasanaModel.rl_sales">
+        <MappingFragment StoreEntitySet="rl_sales">
+          <ScalarProperty Name="entity_cd" ColumnName="entity_cd" />
+          <ScalarProperty Name="project_no" ColumnName="project_no" />
+          <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+          <ScalarProperty Name="debtor_acct" ColumnName="debtor_acct" />
+          <ScalarProperty Name="business_id" ColumnName="business_id" />
+          <ScalarProperty Name="sell_price" ColumnName="sell_price" />
+          <ScalarProperty Name="sales_Date" ColumnName="sales_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

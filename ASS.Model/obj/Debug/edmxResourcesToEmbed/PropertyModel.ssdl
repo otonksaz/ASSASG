@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POM_Property_DasanaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cf_business">
+    <Key>
+      <PropertyRef Name="business_id" />
+    </Key>
+    <Property Name="business_id" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="class_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="category" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="salutation" Type="varchar" MaxLength="15" />
+    <Property Name="address1" Type="varchar" MaxLength="60" />
+    <Property Name="address2" Type="varchar" MaxLength="60" />
+    <Property Name="address3" Type="varchar" MaxLength="60" />
+    <Property Name="post_cd" Type="varchar" MaxLength="10" />
+    <Property Name="tel_no" Type="varchar" MaxLength="15" />
+    <Property Name="hand_phone" Type="varchar" MaxLength="15" />
+    <Property Name="fax_no" Type="varchar" MaxLength="15" />
+    <Property Name="sex" Type="varchar" MaxLength="1" />
+    <Property Name="birth_date" Type="datetime" />
+    <Property Name="nationality" Type="varchar" MaxLength="3" />
+    <Property Name="marital_status" Type="char" MaxLength="1" />
+    <Property Name="income_tax" Type="varchar" MaxLength="20" />
+    <Property Name="mail_type" Type="char" MaxLength="1" />
+    <Property Name="mail_addr1" Type="varchar" MaxLength="60" />
+    <Property Name="mail_addr2" Type="varchar" MaxLength="60" />
+    <Property Name="mail_addr3" Type="varchar" MaxLength="60" />
+    <Property Name="mail_post_cd" Type="varchar" MaxLength="10" />
+    <Property Name="co_name" Type="varchar" MaxLength="60" />
+    <Property Name="co_addr1" Type="varchar" MaxLength="60" />
+    <Property Name="co_addr2" Type="varchar" MaxLength="60" />
+    <Property Name="co_addr3" Type="varchar" MaxLength="60" />
+    <Property Name="co_post_cd" Type="varchar" MaxLength="10" />
+    <Property Name="co_tel_no" Type="varchar" MaxLength="15" />
+    <Property Name="co_fax_no" Type="varchar" MaxLength="15" />
+    <Property Name="designation" Type="varchar" MaxLength="60" />
+    <Property Name="contact_person" Type="varchar" MaxLength="60" />
+    <Property Name="statement_type" Type="char" MaxLength="1" />
+    <Property Name="interest" Type="char" MaxLength="1" />
+    <Property Name="reminder" Type="char" MaxLength="1" />
+    <Property Name="credit_terms" Type="varchar" MaxLength="4" />
+    <Property Name="remark" Type="varchar" MaxLength="255" />
+    <Property Name="audit_user" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+    <Property Name="religion_cd" Type="char" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="rl_sales">
+    <Key>
+      <PropertyRef Name="entity_cd" />
+      <PropertyRef Name="project_no" />
+      <PropertyRef Name="lot_no" />
+      <PropertyRef Name="debtor_acct" />
+      <PropertyRef Name="business_id" />
+    </Key>
+    <Property Name="entity_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="project_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="lot_no" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="debtor_acct" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="business_id" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="sell_price" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="sales_Date" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_rl_sales_cf_business">
+    <End Role="cf_business" Type="Self.cf_business" Multiplicity="1" />
+    <End Role="rl_sales" Type="Self.rl_sales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cf_business">
+        <PropertyRef Name="business_id" />
+      </Principal>
+      <Dependent Role="rl_sales">
+        <PropertyRef Name="business_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="POM_Property_DasanaModelStoreContainer">
+    <EntitySet Name="cf_business" EntityType="Self.cf_business" Schema="mgr" store:Type="Tables" />
+    <EntitySet Name="rl_sales" EntityType="Self.rl_sales" Schema="mgr" store:Type="Tables" />
+    <AssociationSet Name="FK_rl_sales_cf_business" Association="Self.FK_rl_sales_cf_business">
+      <End Role="cf_business" EntitySet="cf_business" />
+      <End Role="rl_sales" EntitySet="rl_sales" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

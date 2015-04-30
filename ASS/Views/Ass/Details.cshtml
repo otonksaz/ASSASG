@@ -1,0 +1,179 @@
+﻿@model ASS.Model.ass_complaint
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function openReport(id) {
+            window.open('@Url.Content("~/AssReport/printOut/")' + id, "Print");
+        }
+
+        $(document).ready(function () {
+            $("#okOpen").click(function () {
+                $.ajax({
+                    url: '@Url.Content("~/AssStatusUpdate/SetOpen")',
+                    data: JSON.stringify({ comp_id: '@Model.id' }),
+                    type: 'POST',
+                    contentType: 'application/json;',
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.success == 1) {
+                            $("#divOpen").hide();
+                            $("#myModal").modal('hide');
+                        }
+                        else {
+                            alert(result.ex);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<h2>Complaint</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            NO.
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id)
+        </dd>
+
+        <dt>
+            Project No
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_no)
+        </dd>
+
+        <dt>
+            Unit
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lot_no)
+        </dd>
+
+        <dt>
+            Business ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.business_id)
+        </dd>
+
+        <dt>
+            CP Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cp_name)
+        </dd>
+
+        <dt>
+            CP Telp
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cp_telp)
+        </dd>
+
+        <dt>
+            Checklist Date
+        </dt>
+
+        <dd>
+            @Model.check_date.ToString("dd-MM-yyyy")
+        </dd>
+
+        <dt>
+            Contractor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cm_contractor.trade)
+        </dd>
+
+        <dt>
+            Controller / Checker
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.controller_name)
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descs)
+        </dd>
+
+        <dt>
+            Input Date
+        </dt>
+
+        <dd>
+            @Model.input_date.ToString("dd-MM-yyyy HH:mm:ss")
+        </dd>
+    </dl>
+
+    <table class="table">
+        <tr>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Due Date</th>
+        </tr>
+        @foreach (var item in Model.ass_complaint_dtl)
+        {
+            <tr>
+                <td>@Html.DisplayFor(a => item.ass_category.name)</td>
+                <td>@Html.DisplayFor(a => item.ass_location.name)</td>
+                <td>@Html.DisplayFor(a => item.descs)</td>
+                <td>@item.due_date.ToString("dd-MM-yyyy")</td>
+            </tr>
+        }
+    </table>
+
+</div>
+<div>
+    @Html.ActionLink(" ", "Index", null, htmlAttributes: new { @class = "glyphicon glyphicon-arrow-left btn" }) |          
+    @if (Model.ass_complaint_dtl.FirstOrDefault().curr_status_id == null)
+    {
+        <span id="divOpen">
+            @Html.ActionLink(" ", "Edit", new { id = Model.id }, htmlAttributes: new { @class = "glyphicon glyphicon-edit btn" })
+            | <a href="#" id="linkOpen" class="glyphicon glyphicon-ok btn" data-toggle="modal" data-target="#myModal"> </a> |
+        </span>
+    }    
+    <a href="#" id="aPrint" onclick="openReport(@Model.id)" class="glyphicon glyphicon-print btn"> </a>    
+</div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Set Complaint to "Open"?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="okOpen">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

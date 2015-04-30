@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ASS.Model.ass_complaint>
+
+@{
+    ViewBag.Title = "ProgressComplainByUnit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(function(){
+            $(".tbunit tr").click(function () {
+                var rowIndex = this.rowIndex;
+                if (rowIndex == 0){
+                    return;
+                }
+                else {
+                    var compId = $("#compId-" + rowIndex).val();
+                    window.location.href = '@Url.Content("~/AssReminder/ProgressByComplaint?id=")' + compId;
+                }
+            });
+        });
+    </script>
+}
+
+<h2>Complaint</h2>
+<hr />
+
+<table class="table table-hover">
+    <tr>
+        <td><label>Project</label></td>
+        <td>@Model.FirstOrDefault().pm_tenancy.pl_project.descs</td>
+    </tr>
+    <tr>
+        <td><label>Unit</label></td>
+        <td>@Model.FirstOrDefault().lot_no</td>
+    </tr>
+</table>
+
+<table class="table borderless table-hover tbunit">
+    <tr>
+        <th>
+            NO.
+        </th>
+        <th>
+            Project No
+        </th>
+        <th>
+            Unit
+        </th>
+        <th>
+            Business ID
+        </th>
+        <th>
+            CP Name
+        </th>
+        <th>
+            CP Telp
+        </th>
+        <th>
+            CheckList Date
+        </th>
+        <th>
+            Contractor
+        </th>
+        <th>
+            Description
+        </th>
+    </tr>
+
+    @{int no = 1;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <input type="hidden" id="compId-@no" value="@item.id" />
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.project_no)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lot_no)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.business_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cp_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cp_telp)
+            </td>
+            <td>
+                @item.check_date.ToString("dd-MM-yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cm_contractor.trade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descs)
+            </td>
+        </tr>
+        no++;
+    }
+
+</table>

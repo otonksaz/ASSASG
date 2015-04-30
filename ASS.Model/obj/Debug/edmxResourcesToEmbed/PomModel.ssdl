@@ -1,0 +1,809 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POM_DasanaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ass_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="parent_id" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descs" Type="varchar(max)" />
+    <Property Name="work_duration" Type="int" />
+    <Property Name="is_main" Type="bit" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ass_complaint">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="complaint_cd" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="entity_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="project_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="lot_no" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="business_id" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="cp_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="cp_telp" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cp_email" Type="varchar" MaxLength="50" />
+    <Property Name="check_date" Type="datetime" Nullable="false" />
+    <Property Name="contractor_id" Type="int" Nullable="false" />
+    <Property Name="controller_name" Type="varchar" MaxLength="100" />
+    <Property Name="descs" Type="varchar(max)" />
+    <Property Name="priority_id" Type="int" Nullable="false" />
+    <Property Name="input_date" Type="datetime" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="attach_file" Type="image" />
+    <Property Name="closing_date" Type="datetime" />
+    <Property Name="cancel_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ass_complaint_dtl">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="comp_id" Type="int" Nullable="false" />
+    <Property Name="cat_id" Type="int" Nullable="false" />
+    <Property Name="location_id" Type="int" Nullable="false" />
+    <Property Name="descs" Type="varchar(max)" />
+    <Property Name="due_date" Type="datetime" Nullable="false" />
+    <Property Name="attach_file" Type="image" />
+    <Property Name="curr_status_id" Type="int" />
+  </EntityType>
+  <EntityType Name="ass_complaint_mail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="comp_id" Type="int" Nullable="false" />
+    <Property Name="mail_no" Type="varchar" MaxLength="55" Nullable="false" />
+    <Property Name="email_to" Type="varchar" MaxLength="100" />
+    <Property Name="mail_date" Type="datetime" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ass_email_sender">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ent_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="255" />
+    <Property Name="email_template" Type="text" />
+  </EntityType>
+  <EntityType Name="ass_location">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descs" Type="varchar(max)" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ass_migrate_closing">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="migrate_id" Type="int" Nullable="false" />
+    <Property Name="closing_date" Type="datetime" Nullable="false" />
+    <Property Name="closing" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ass_migrate_lastmonth">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="cutoff_date" Type="datetime" Nullable="false" />
+    <Property Name="ent_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="project_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="on_progress" Type="int" Nullable="false" />
+    <Property Name="closing" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ass_priority">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descs" Type="varchar(max)" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ass_reminder">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descs" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="start_day" Type="int" />
+    <Property Name="end_day" Type="int" />
+    <Property Name="clases" Type="varchar" MaxLength="50" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+    <Property Name="owner_user" Type="int" />
+  </EntityType>
+  <EntityType Name="ass_status">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descs" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ass_status_flow">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="current_status" Type="int" Nullable="false" />
+    <Property Name="next_status" Type="int" Nullable="false" />
+    <Property Name="step_no" Type="int" />
+  </EntityType>
+  <EntityType Name="ass_status_update">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="compdtl_id" Type="int" Nullable="false" />
+    <Property Name="status_id" Type="int" Nullable="false" />
+    <Property Name="status_date" Type="datetime" Nullable="false" />
+    <Property Name="remark" Type="varchar(max)" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ass_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="55" Nullable="false" />
+    <Property Name="fullname" Type="varchar" MaxLength="55" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" />
+    <Property Name="user_id" Type="int" />
+  </EntityType>
+  <EntityType Name="cf_business">
+    <Key>
+      <PropertyRef Name="business_id" />
+    </Key>
+    <Property Name="business_id" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="class_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="category" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="salutation" Type="varchar" MaxLength="15" />
+    <Property Name="address1" Type="varchar" MaxLength="60" />
+    <Property Name="address2" Type="varchar" MaxLength="60" />
+    <Property Name="address3" Type="varchar" MaxLength="60" />
+    <Property Name="post_cd" Type="varchar" MaxLength="10" />
+    <Property Name="tel_no" Type="varchar" MaxLength="15" />
+    <Property Name="hand_phone" Type="varchar" MaxLength="15" />
+    <Property Name="fax_no" Type="varchar" MaxLength="15" />
+    <Property Name="sex" Type="varchar" MaxLength="1" />
+    <Property Name="birth_date" Type="datetime" />
+    <Property Name="nationality" Type="varchar" MaxLength="3" />
+    <Property Name="marital_status" Type="char" MaxLength="1" />
+    <Property Name="income_tax" Type="varchar" MaxLength="20" />
+    <Property Name="mail_type" Type="char" MaxLength="1" />
+    <Property Name="mail_addr1" Type="varchar" MaxLength="60" />
+    <Property Name="mail_addr2" Type="varchar" MaxLength="60" />
+    <Property Name="mail_addr3" Type="varchar" MaxLength="60" />
+    <Property Name="mail_post_cd" Type="varchar" MaxLength="10" />
+    <Property Name="co_name" Type="varchar" MaxLength="60" />
+    <Property Name="co_addr1" Type="varchar" MaxLength="60" />
+    <Property Name="co_addr2" Type="varchar" MaxLength="60" />
+    <Property Name="co_addr3" Type="varchar" MaxLength="60" />
+    <Property Name="co_post_cd" Type="varchar" MaxLength="10" />
+    <Property Name="co_tel_no" Type="varchar" MaxLength="15" />
+    <Property Name="co_fax_no" Type="varchar" MaxLength="15" />
+    <Property Name="designation" Type="varchar" MaxLength="60" />
+    <Property Name="contact_person" Type="varchar" MaxLength="60" />
+    <Property Name="statement_type" Type="char" MaxLength="1" />
+    <Property Name="interest" Type="char" MaxLength="1" />
+    <Property Name="reminder" Type="char" MaxLength="1" />
+    <Property Name="credit_terms" Type="varchar" MaxLength="4" />
+    <Property Name="remark" Type="varchar" MaxLength="255" />
+    <Property Name="audit_user" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+    <Property Name="religion_cd" Type="char" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="cm_contractor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="creditor_acct" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="trade" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="255" />
+    <Property Name="telp" Type="varchar" MaxLength="20" />
+    <Property Name="cp_name" Type="varchar" MaxLength="50" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pl_project">
+    <Key>
+      <PropertyRef Name="entity_cd" />
+      <PropertyRef Name="project_no" />
+    </Key>
+    <Property Name="entity_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="project_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="project_date" Type="datetime" />
+    <Property Name="project_ref" Type="varchar" MaxLength="20" />
+    <Property Name="debtor_acct" Type="varchar" MaxLength="20" />
+    <Property Name="debtor_type" Type="varchar" MaxLength="2" />
+    <Property Name="owner_type" Type="varchar" MaxLength="2" />
+    <Property Name="location" Type="varchar" MaxLength="4" />
+    <Property Name="project_type" Type="varchar" MaxLength="4" />
+    <Property Name="descs" Type="varchar" MaxLength="255" />
+    <Property Name="award_date" Type="datetime" />
+    <Property Name="start_date" Type="datetime" />
+    <Property Name="completion_date" Type="datetime" />
+    <Property Name="currency_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="contract_amt" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="auth_vo" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="claim_todate" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="ret_todate" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="ret_limit" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="ret_percent" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="max_ret_percent" Type="numeric" Precision="5" Scale="2" />
+    <Property Name="ret_release_date" Type="datetime" />
+    <Property Name="penalty" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="min_claim_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="claim_interval" Type="numeric" Precision="12" Scale="0" />
+    <Property Name="ret_acct" Type="varchar" MaxLength="20" />
+    <Property Name="profit_acct" Type="varchar" MaxLength="20" />
+    <Property Name="wip_acct" Type="varchar" MaxLength="20" />
+    <Property Name="revenue_acct" Type="varchar" MaxLength="20" />
+    <Property Name="memo_acct" Type="varchar" MaxLength="20" />
+    <Property Name="project_rev_cd" Type="varchar" MaxLength="20" />
+    <Property Name="ret_cd" Type="varchar" MaxLength="20" />
+    <Property Name="memo_cd" Type="varchar" MaxLength="20" />
+    <Property Name="est_cost" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="prev_recog_profit" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="project_status" Type="char" MaxLength="1" />
+    <Property Name="remarks" Type="varchar" MaxLength="250" />
+    <Property Name="audit_user" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+    <Property Name="project_factor" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="doc_no" Type="numeric" Precision="12" Scale="0" />
+    <Property Name="claim_method" Type="char" MaxLength="1" />
+    <Property Name="act_complete_dt" Type="datetime" />
+    <Property Name="last_bill_date" Type="datetime" />
+    <Property Name="div_cd" Type="varchar" MaxLength="4" />
+    <Property Name="dept_cd" Type="varchar" MaxLength="8" />
+    <Property Name="activity_cd" Type="varchar" MaxLength="6" />
+    <Property Name="wstatus" Type="varchar" MaxLength="2" />
+    <Property Name="contact_person" Type="varchar" MaxLength="60" />
+    <Property Name="contact_telno" Type="varchar" MaxLength="30" />
+    <Property Name="contact_email" Type="varchar" MaxLength="60" />
+    <Property Name="designation" Type="varchar" MaxLength="60" />
+    <Property Name="retention_activity_cd" Type="varchar" MaxLength="6" />
+  </EntityType>
+  <EntityType Name="pm_lot">
+    <Key>
+      <PropertyRef Name="entity_cd" />
+      <PropertyRef Name="project_no" />
+      <PropertyRef Name="lot_no" />
+    </Key>
+    <Property Name="entity_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="project_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="lot_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="property_cd" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="descs" Type="varchar" MaxLength="255" />
+    <Property Name="block_no" Type="varchar" MaxLength="4" />
+    <Property Name="type" Type="varchar" MaxLength="2" />
+    <Property Name="location_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="direction_cd" Type="varchar" MaxLength="4" />
+    <Property Name="theme_cd" Type="varchar" MaxLength="4" />
+    <Property Name="class_cd" Type="varchar" MaxLength="4" />
+    <Property Name="category_cd" Type="varchar" MaxLength="4" />
+    <Property Name="zone_cd" Type="varchar" MaxLength="4" />
+    <Property Name="level_no" Type="varchar" MaxLength="6" />
+    <Property Name="area_uom" Type="varchar" MaxLength="4" />
+    <Property Name="land_area" Type="numeric" Precision="21" Scale="6" />
+    <Property Name="land_rate" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="land_tax_cd" Type="varchar" MaxLength="4" />
+    <Property Name="land_tax_amt" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="land_price" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="land_net_price" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="extra_land_area" Type="numeric" Precision="21" Scale="6" />
+    <Property Name="extra_land_rate" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="extra_land_price" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="build_up_area" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="budget_cost" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="package_cd" Type="varchar" MaxLength="6" />
+    <Property Name="package_price" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="package_tax_cd" Type="varchar" MaxLength="4" />
+    <Property Name="package_tax_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="package_net_price" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="other_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="other_tax_cd" Type="varchar" MaxLength="4" />
+    <Property Name="other_tax_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="other_net_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="min_selling_price" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="sold_date" Type="datetime" />
+    <Property Name="sold_type" Type="char" MaxLength="1" />
+    <Property Name="type_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="rental" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="rent_rate" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="rate_type" Type="char" MaxLength="1" />
+    <Property Name="rent_type" Type="char" MaxLength="1" />
+    <Property Name="comm_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="bgt_rate" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="budget_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="share_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="rentable_area" Type="numeric" Precision="21" Scale="6" />
+    <Property Name="tariff_percent" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="deposit_flag" Type="char" MaxLength="1" />
+    <Property Name="deposit_amt" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="owner_acct" Type="varchar" MaxLength="20" />
+    <Property Name="addr1" Type="varchar" MaxLength="60" />
+    <Property Name="addr2" Type="varchar" MaxLength="60" />
+    <Property Name="addr3" Type="varchar" MaxLength="60" />
+    <Property Name="post_cd" Type="varchar" MaxLength="6" />
+    <Property Name="pic_x" Type="numeric" Precision="12" Scale="0" />
+    <Property Name="pic_y" Type="numeric" Precision="12" Scale="0" />
+    <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="prev_profit_recog" Type="numeric" Precision="21" Scale="2" Nullable="false" />
+    <Property Name="sales_flag" Type="varchar" MaxLength="1" />
+    <Property Name="rent_flag" Type="varchar" MaxLength="1" />
+    <Property Name="ref_no" Type="char" MaxLength="30" />
+    <Property Name="remarks" Type="varchar" MaxLength="255" />
+    <Property Name="audit_user" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+    <Property Name="area" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="rented_status" Type="varchar" MaxLength="1" />
+    <Property Name="pic_x_all" Type="numeric" Precision="12" Scale="0" />
+    <Property Name="pic_y_all" Type="numeric" Precision="12" Scale="0" />
+  </EntityType>
+  <EntityType Name="pm_lot_contractor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ent_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="project_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="lot_no" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="contractor_id" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_tenancy">
+    <Key>
+      <PropertyRef Name="entity_cd" />
+      <PropertyRef Name="project_no" />
+      <PropertyRef Name="business_id" />
+      <PropertyRef Name="tenant_no" />
+    </Key>
+    <Property Name="entity_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="project_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="trade_name" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="business_id" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="tenant_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="contract_date" Type="datetime" Nullable="false" />
+    <Property Name="commence_date" Type="datetime" Nullable="false" />
+    <Property Name="expiry_date" Type="datetime" Nullable="false" />
+    <Property Name="currency_cd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="apply_no" Type="numeric" Precision="12" Scale="0" />
+    <Property Name="theme_cd" Type="varchar" MaxLength="4" />
+    <Property Name="class_cd" Type="varchar" MaxLength="4" />
+    <Property Name="category_cd" Type="varchar" MaxLength="4" />
+    <Property Name="staff" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="cr_terms" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="statements" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="reminder" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="interest" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="ten_solicitor" Type="varchar" MaxLength="8" />
+    <Property Name="ten_solicitor_ref" Type="varchar" MaxLength="30" />
+    <Property Name="solicitor" Type="varchar" MaxLength="8" />
+    <Property Name="solicitor_ref" Type="varchar" MaxLength="30" />
+    <Property Name="area" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="remark" Type="varchar" MaxLength="255" />
+    <Property Name="status" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="reason_cd" Type="varchar" MaxLength="4" />
+    <Property Name="audit_user" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="audit_date" Type="datetime" Nullable="false" />
+    <Property Name="terminate_date" Type="datetime" />
+    <Property Name="tarrif_percent" Type="numeric" Precision="5" Scale="2" />
+    <Property Name="booking_date" Type="datetime" />
+    <Property Name="contract_no" Type="varchar" MaxLength="30" />
+    <Property Name="rental_basis" Type="char" MaxLength="1" />
+    <Property Name="contract_sum" Type="numeric" Precision="21" Scale="2" />
+    <Property Name="debtor_type" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <Association Name="FK_ass_category_ass_category">
+    <End Role="ass_category" Type="Self.ass_category" Multiplicity="0..1" />
+    <End Role="ass_category1" Type="Self.ass_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_category1">
+        <PropertyRef Name="parent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_category_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="1" />
+    <End Role="ass_category" Type="Self.ass_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_category">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_ass_priority">
+    <End Role="ass_priority" Type="Self.ass_priority" Multiplicity="1" />
+    <End Role="ass_complaint" Type="Self.ass_complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_priority">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint">
+        <PropertyRef Name="priority_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="1" />
+    <End Role="ass_complaint" Type="Self.ass_complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_cm_contractor">
+    <End Role="cm_contractor" Type="Self.cm_contractor" Multiplicity="1" />
+    <End Role="ass_complaint" Type="Self.ass_complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cm_contractor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint">
+        <PropertyRef Name="contractor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_dtl_ass_category">
+    <End Role="ass_category" Type="Self.ass_category" Multiplicity="1" />
+    <End Role="ass_complaint_dtl" Type="Self.ass_complaint_dtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_dtl">
+        <PropertyRef Name="cat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_dtl_ass_complaint">
+    <End Role="ass_complaint" Type="Self.ass_complaint" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ass_complaint_dtl" Type="Self.ass_complaint_dtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_complaint">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_dtl">
+        <PropertyRef Name="comp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_dtl_ass_location">
+    <End Role="ass_location" Type="Self.ass_location" Multiplicity="1" />
+    <End Role="ass_complaint_dtl" Type="Self.ass_complaint_dtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_location">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_dtl">
+        <PropertyRef Name="location_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_mail_ass_complaint">
+    <End Role="ass_complaint" Type="Self.ass_complaint" Multiplicity="1" />
+    <End Role="ass_complaint_mail" Type="Self.ass_complaint_mail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_complaint">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_mail">
+        <PropertyRef Name="comp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_mail_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="1" />
+    <End Role="ass_complaint_mail" Type="Self.ass_complaint_mail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_mail">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_location_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="1" />
+    <End Role="ass_location" Type="Self.ass_location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_location">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_migrate_closing_ass_migrate_lastmonth">
+    <End Role="ass_migrate_lastmonth" Type="Self.ass_migrate_lastmonth" Multiplicity="1" />
+    <End Role="ass_migrate_closing" Type="Self.ass_migrate_closing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_migrate_lastmonth">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_migrate_closing">
+        <PropertyRef Name="migrate_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_migrate_closing_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="1" />
+    <End Role="ass_migrate_closing" Type="Self.ass_migrate_closing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_migrate_closing">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_priority_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="1" />
+    <End Role="ass_priority" Type="Self.ass_priority" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_priority">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_status_flow_ass_status">
+    <End Role="ass_status" Type="Self.ass_status" Multiplicity="1" />
+    <End Role="ass_status_flow" Type="Self.ass_status_flow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_status">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_flow">
+        <PropertyRef Name="current_status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_status_flow_ass_status1">
+    <End Role="ass_status" Type="Self.ass_status" Multiplicity="1" />
+    <End Role="ass_status_flow" Type="Self.ass_status_flow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_status">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_flow">
+        <PropertyRef Name="next_status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_status_update_ass_complaint_dtl">
+    <End Role="ass_complaint_dtl" Type="Self.ass_complaint_dtl" Multiplicity="1" />
+    <End Role="ass_status_update" Type="Self.ass_status_update" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_complaint_dtl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_update">
+        <PropertyRef Name="compdtl_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_status_update_ass_status">
+    <End Role="ass_status" Type="Self.ass_status" Multiplicity="1" />
+    <End Role="ass_status_update" Type="Self.ass_status_update" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_status">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_update">
+        <PropertyRef Name="status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_status_update_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="1" />
+    <End Role="ass_status_update" Type="Self.ass_status_update" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_update">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_user_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="0..1" />
+    <End Role="ass_user1" Type="Self.ass_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_user1">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_cm_contractor_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="1" />
+    <End Role="cm_contractor" Type="Self.cm_contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cm_contractor">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_lot_contractor_ass_user">
+    <End Role="ass_user" Type="Self.ass_user" Multiplicity="1" />
+    <End Role="pm_lot_contractor" Type="Self.pm_lot_contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="pm_lot_contractor">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_lot_contractor_cm_contractor">
+    <End Role="cm_contractor" Type="Self.cm_contractor" Multiplicity="1" />
+    <End Role="pm_lot_contractor" Type="Self.pm_lot_contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cm_contractor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="pm_lot_contractor">
+        <PropertyRef Name="contractor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="POM_DasanaModelStoreContainer">
+    <EntitySet Name="ass_category" EntityType="Self.ass_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_complaint" EntityType="Self.ass_complaint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_complaint_dtl" EntityType="Self.ass_complaint_dtl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_complaint_mail" EntityType="Self.ass_complaint_mail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_email_sender" EntityType="Self.ass_email_sender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_location" EntityType="Self.ass_location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_migrate_closing" EntityType="Self.ass_migrate_closing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_migrate_lastmonth" EntityType="Self.ass_migrate_lastmonth" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_priority" EntityType="Self.ass_priority" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_reminder" EntityType="Self.ass_reminder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_status" EntityType="Self.ass_status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_status_flow" EntityType="Self.ass_status_flow" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_status_update" EntityType="Self.ass_status_update" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ass_user" EntityType="Self.ass_user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cf_business" EntityType="Self.cf_business" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cm_contractor" EntityType="Self.cm_contractor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pl_project" EntityType="Self.pl_project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pm_lot" EntityType="Self.pm_lot" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pm_lot_contractor" EntityType="Self.pm_lot_contractor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pm_tenancy" EntityType="Self.pm_tenancy" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ass_category_ass_category" Association="Self.FK_ass_category_ass_category">
+      <End Role="ass_category" EntitySet="ass_category" />
+      <End Role="ass_category1" EntitySet="ass_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_category_ass_user" Association="Self.FK_ass_category_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_category" EntitySet="ass_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_ass_priority" Association="Self.FK_ass_complaint_ass_priority">
+      <End Role="ass_priority" EntitySet="ass_priority" />
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_ass_user" Association="Self.FK_ass_complaint_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_cm_contractor" Association="Self.FK_ass_complaint_cm_contractor">
+      <End Role="cm_contractor" EntitySet="cm_contractor" />
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_dtl_ass_category" Association="Self.FK_ass_complaint_dtl_ass_category">
+      <End Role="ass_category" EntitySet="ass_category" />
+      <End Role="ass_complaint_dtl" EntitySet="ass_complaint_dtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_dtl_ass_complaint" Association="Self.FK_ass_complaint_dtl_ass_complaint">
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+      <End Role="ass_complaint_dtl" EntitySet="ass_complaint_dtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_dtl_ass_location" Association="Self.FK_ass_complaint_dtl_ass_location">
+      <End Role="ass_location" EntitySet="ass_location" />
+      <End Role="ass_complaint_dtl" EntitySet="ass_complaint_dtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_mail_ass_complaint" Association="Self.FK_ass_complaint_mail_ass_complaint">
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+      <End Role="ass_complaint_mail" EntitySet="ass_complaint_mail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_mail_ass_user" Association="Self.FK_ass_complaint_mail_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_complaint_mail" EntitySet="ass_complaint_mail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_location_ass_user" Association="Self.FK_ass_location_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_location" EntitySet="ass_location" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_migrate_closing_ass_migrate_lastmonth" Association="Self.FK_ass_migrate_closing_ass_migrate_lastmonth">
+      <End Role="ass_migrate_lastmonth" EntitySet="ass_migrate_lastmonth" />
+      <End Role="ass_migrate_closing" EntitySet="ass_migrate_closing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_migrate_closing_ass_user" Association="Self.FK_ass_migrate_closing_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_migrate_closing" EntitySet="ass_migrate_closing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_priority_ass_user" Association="Self.FK_ass_priority_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_priority" EntitySet="ass_priority" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_status_flow_ass_status" Association="Self.FK_ass_status_flow_ass_status">
+      <End Role="ass_status" EntitySet="ass_status" />
+      <End Role="ass_status_flow" EntitySet="ass_status_flow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_status_flow_ass_status1" Association="Self.FK_ass_status_flow_ass_status1">
+      <End Role="ass_status" EntitySet="ass_status" />
+      <End Role="ass_status_flow" EntitySet="ass_status_flow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_status_update_ass_complaint_dtl" Association="Self.FK_ass_status_update_ass_complaint_dtl">
+      <End Role="ass_complaint_dtl" EntitySet="ass_complaint_dtl" />
+      <End Role="ass_status_update" EntitySet="ass_status_update" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_status_update_ass_status" Association="Self.FK_ass_status_update_ass_status">
+      <End Role="ass_status" EntitySet="ass_status" />
+      <End Role="ass_status_update" EntitySet="ass_status_update" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_status_update_ass_user" Association="Self.FK_ass_status_update_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_status_update" EntitySet="ass_status_update" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_user_ass_user" Association="Self.FK_ass_user_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_user1" EntitySet="ass_user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cm_contractor_ass_user" Association="Self.FK_cm_contractor_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="cm_contractor" EntitySet="cm_contractor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_lot_contractor_ass_user" Association="Self.FK_pm_lot_contractor_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="pm_lot_contractor" EntitySet="pm_lot_contractor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_lot_contractor_cm_contractor" Association="Self.FK_pm_lot_contractor_cm_contractor">
+      <End Role="cm_contractor" EntitySet="cm_contractor" />
+      <End Role="pm_lot_contractor" EntitySet="pm_lot_contractor" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

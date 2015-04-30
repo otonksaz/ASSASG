@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POM_Property_DasanaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cf_business">
+    <Key>
+      <PropertyRef Name="business_id" />
+    </Key>
+    <Property Name="business_id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="class_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="category" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="salutation" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="address1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="address2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="address3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="post_cd" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="tel_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="hand_phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="fax_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="birth_date" Type="DateTime" Precision="3" />
+    <Property Name="nationality" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="marital_status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="income_tax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="mail_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="mail_addr1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="mail_addr2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="mail_addr3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="mail_post_cd" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="co_name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="co_addr1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="co_addr2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="co_addr3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="co_post_cd" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="co_tel_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="co_fax_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="designation" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="contact_person" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="statement_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="interest" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="reminder" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="credit_terms" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="audit_user" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="religion_cd" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="rl_sales" Relationship="Self.FK_rl_sales_cf_business" FromRole="cf_business" ToRole="rl_sales" />
+  </EntityType>
+  <EntityType Name="rl_sales">
+    <Key>
+      <PropertyRef Name="entity_cd" />
+      <PropertyRef Name="project_no" />
+      <PropertyRef Name="lot_no" />
+      <PropertyRef Name="debtor_acct" />
+      <PropertyRef Name="business_id" />
+    </Key>
+    <Property Name="entity_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="project_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lot_no" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="debtor_acct" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="business_id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sell_price" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="sales_Date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="cf_business" Relationship="Self.FK_rl_sales_cf_business" FromRole="rl_sales" ToRole="cf_business" />
+  </EntityType>
+  <Association Name="FK_rl_sales_cf_business">
+    <End Role="cf_business" Type="Self.cf_business" Multiplicity="1" />
+    <End Role="rl_sales" Type="Self.rl_sales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cf_business">
+        <PropertyRef Name="business_id" />
+      </Principal>
+      <Dependent Role="rl_sales">
+        <PropertyRef Name="business_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="POM_Property_DasanaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cf_business" EntityType="Self.cf_business" />
+    <EntitySet Name="rl_sales" EntityType="Self.rl_sales" />
+    <AssociationSet Name="FK_rl_sales_cf_business" Association="Self.FK_rl_sales_cf_business">
+      <End Role="cf_business" EntitySet="cf_business" />
+      <End Role="rl_sales" EntitySet="rl_sales" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

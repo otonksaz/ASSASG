@@ -1,0 +1,1015 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POM_DasanaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ass_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="parent_id" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="work_duration" Type="Int32" />
+    <NavigationProperty Name="childs" Relationship="Self.FK_ass_category_ass_category" FromRole="ass_category" ToRole="ass_category1" />
+    <NavigationProperty Name="parent" Relationship="Self.FK_ass_category_ass_category" FromRole="ass_category1" ToRole="ass_category" />
+    <NavigationProperty Name="ass_complaint_dtl" Relationship="Self.FK_ass_complaint_dtl_ass_category" FromRole="ass_category" ToRole="ass_complaint_dtl" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_ass_category_ass_user" FromRole="ass_category" ToRole="ass_user" />
+    <Property Name="is_main" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ass_complaint">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="complaint_cd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false">
+      <Documentation>
+        <LongDescription>Complain Code</LongDescription>
+      </Documentation>
+    </Property>
+    <Property Name="entity_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="project_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lot_no" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="business_id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cp_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cp_telp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="check_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="contractor_id" Type="Int32" Nullable="false" />
+    <Property Name="descs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="input_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="attach_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="ass_complaint_dtl" Relationship="Self.FK_ass_complaint_dtl_ass_complaint" FromRole="ass_complaint" ToRole="ass_complaint_dtl" />
+    <Property Name="cp_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="closing_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="cm_contractor" Relationship="POM_DasanaModel.FK_ass_complaint_cm_contractor" FromRole="ass_complaint" ToRole="cm_contractor" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_ass_complaint_ass_user" FromRole="ass_complaint" ToRole="ass_user" />
+    <NavigationProperty Name="pm_tenancy" Relationship="POM_DasanaModel.pm_tenancyass_complaint" FromRole="ass_complaint" ToRole="pm_tenancy" />
+    <Property Name="controller_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ass_complaint_mail" Relationship="POM_DasanaModel.FK_ass_complaint_mail_ass_complaint" FromRole="ass_complaint" ToRole="ass_complaint_mail" />
+    <Property Name="cancel_date" Type="DateTime" Precision="3" />
+    <Property Name="priority_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ass_priority" Relationship="POM_DasanaModel.FK_ass_complaint_ass_priority" FromRole="ass_complaint" ToRole="ass_priority" />
+  </EntityType>
+  <EntityType Name="ass_complaint_dtl">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="comp_id" Type="Int32" Nullable="false" />
+    <Property Name="cat_id" Type="Int32" Nullable="false" />
+    <Property Name="location_id" Type="Int32" Nullable="false" />
+    <Property Name="descs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="due_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="attach_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="ass_category" Relationship="Self.FK_ass_complaint_dtl_ass_category" FromRole="ass_complaint_dtl" ToRole="ass_category" />
+    <NavigationProperty Name="ass_complaint" Relationship="Self.FK_ass_complaint_dtl_ass_complaint" FromRole="ass_complaint_dtl" ToRole="ass_complaint" />
+    <NavigationProperty Name="ass_location" Relationship="Self.FK_ass_complaint_dtl_ass_location" FromRole="ass_complaint_dtl" ToRole="ass_location" />
+    <NavigationProperty Name="ass_status_update" Relationship="Self.FK_ass_status_update_ass_complaint_dtl" FromRole="ass_complaint_dtl" ToRole="ass_status_update" />
+    <Property Name="curr_status_id" Type="Int32" />
+    <NavigationProperty Name="ass_status" Relationship="POM_DasanaModel.FK_ass_complaint_dtl_ass_status" FromRole="ass_complaint_dtl" ToRole="ass_status" />
+  </EntityType>
+  <EntityType Name="ass_location">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ass_complaint_dtl" Relationship="Self.FK_ass_complaint_dtl_ass_location" FromRole="ass_location" ToRole="ass_complaint_dtl" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_ass_location_ass_user" FromRole="ass_location" ToRole="ass_user" />
+  </EntityType>
+  <EntityType Name="ass_status">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ass_status_update" Relationship="Self.FK_ass_status_update_ass_status" FromRole="ass_status" ToRole="ass_status_update" />
+    <NavigationProperty Name="ass_complaint_dtl" Relationship="POM_DasanaModel.FK_ass_complaint_dtl_ass_status" FromRole="ass_status" ToRole="ass_complaint_dtl" />
+    <NavigationProperty Name="status_flow_current" Relationship="POM_DasanaModel.FK_ass_status_flow_ass_status" FromRole="ass_status" ToRole="ass_status_flow" />
+    <NavigationProperty Name="status_flow_next" Relationship="POM_DasanaModel.FK_ass_status_flow_ass_status1" FromRole="ass_status" ToRole="ass_status_flow" />
+  </EntityType>
+  <EntityType Name="ass_status_update">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="compdtl_id" Type="Int32" Nullable="false" />
+    <Property Name="status_id" Type="Int32" Nullable="false" />
+    <Property Name="status_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ass_complaint_dtl" Relationship="Self.FK_ass_status_update_ass_complaint_dtl" FromRole="ass_status_update" ToRole="ass_complaint_dtl" />
+    <NavigationProperty Name="ass_status" Relationship="Self.FK_ass_status_update_ass_status" FromRole="ass_status_update" ToRole="ass_status" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_ass_status_update_ass_user" FromRole="ass_status_update" ToRole="ass_user" />
+  </EntityType>
+  <Association Name="FK_ass_category_ass_category">
+    <End Role="ass_category" Type="Self.ass_category" Multiplicity="0..1" />
+    <End Role="ass_category1" Type="Self.ass_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_category1">
+        <PropertyRef Name="parent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_dtl_ass_category">
+    <End Role="ass_category" Type="Self.ass_category" Multiplicity="1" />
+    <End Role="ass_complaint_dtl" Type="Self.ass_complaint_dtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_dtl">
+        <PropertyRef Name="cat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_dtl_ass_complaint">
+    <End Role="ass_complaint" Type="Self.ass_complaint" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ass_complaint_dtl" Type="Self.ass_complaint_dtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_complaint">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_dtl">
+        <PropertyRef Name="comp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_dtl_ass_location">
+    <End Role="ass_location" Type="Self.ass_location" Multiplicity="1" />
+    <End Role="ass_complaint_dtl" Type="Self.ass_complaint_dtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_location">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_dtl">
+        <PropertyRef Name="location_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_status_update_ass_complaint_dtl">
+    <End Role="ass_complaint_dtl" Type="Self.ass_complaint_dtl" Multiplicity="1" />
+    <End Role="ass_status_update" Type="Self.ass_status_update" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_complaint_dtl">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_update">
+        <PropertyRef Name="compdtl_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_status_update_ass_status">
+    <End Role="ass_status" Type="Self.ass_status" Multiplicity="1" />
+    <End Role="ass_status_update" Type="Self.ass_status_update" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_status">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_update">
+        <PropertyRef Name="status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="POM_DasanaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ass_category" EntityType="Self.ass_category" />
+    <EntitySet Name="ass_complaint" EntityType="Self.ass_complaint" />
+    <EntitySet Name="ass_complaint_dtl" EntityType="Self.ass_complaint_dtl" />
+    <EntitySet Name="ass_location" EntityType="Self.ass_location" />
+    <EntitySet Name="ass_status" EntityType="Self.ass_status" />
+    <EntitySet Name="ass_status_update" EntityType="Self.ass_status_update" />
+    <AssociationSet Name="FK_ass_category_ass_category" Association="Self.FK_ass_category_ass_category">
+      <End Role="ass_category" EntitySet="ass_category" />
+      <End Role="ass_category1" EntitySet="ass_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_dtl_ass_category" Association="Self.FK_ass_complaint_dtl_ass_category">
+      <End Role="ass_category" EntitySet="ass_category" />
+      <End Role="ass_complaint_dtl" EntitySet="ass_complaint_dtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_dtl_ass_complaint" Association="Self.FK_ass_complaint_dtl_ass_complaint">
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+      <End Role="ass_complaint_dtl" EntitySet="ass_complaint_dtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_dtl_ass_location" Association="Self.FK_ass_complaint_dtl_ass_location">
+      <End Role="ass_location" EntitySet="ass_location" />
+      <End Role="ass_complaint_dtl" EntitySet="ass_complaint_dtl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_status_update_ass_complaint_dtl" Association="Self.FK_ass_status_update_ass_complaint_dtl">
+      <End Role="ass_complaint_dtl" EntitySet="ass_complaint_dtl" />
+      <End Role="ass_status_update" EntitySet="ass_status_update" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_status_update_ass_status" Association="Self.FK_ass_status_update_ass_status">
+      <End Role="ass_status" EntitySet="ass_status" />
+      <End Role="ass_status_update" EntitySet="ass_status_update" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_dtl_ass_status" Association="POM_DasanaModel.FK_ass_complaint_dtl_ass_status">
+      <End Role="ass_status" EntitySet="ass_status" />
+      <End Role="ass_complaint_dtl" EntitySet="ass_complaint_dtl" />
+    </AssociationSet>
+    <EntitySet Name="ass_status_flow" EntityType="POM_DasanaModel.ass_status_flow" />
+    <AssociationSet Name="FK_ass_status_flow_ass_status" Association="POM_DasanaModel.FK_ass_status_flow_ass_status">
+      <End Role="ass_status" EntitySet="ass_status" />
+      <End Role="ass_status_flow" EntitySet="ass_status_flow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_status_flow_ass_status1" Association="POM_DasanaModel.FK_ass_status_flow_ass_status1">
+      <End Role="ass_status" EntitySet="ass_status" />
+      <End Role="ass_status_flow" EntitySet="ass_status_flow" />
+    </AssociationSet>
+    <EntitySet Name="ass_reminder" EntityType="POM_DasanaModel.ass_reminder" />
+    <EntitySet Name="cm_contractor" EntityType="POM_DasanaModel.cm_contractor" />
+    <AssociationSet Name="FK_ass_complaint_cm_contractor" Association="POM_DasanaModel.FK_ass_complaint_cm_contractor">
+      <End Role="cm_contractor" EntitySet="cm_contractor" />
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+    </AssociationSet>
+    <EntitySet Name="pm_lot_contractor" EntityType="POM_DasanaModel.pm_lot_contractor" />
+    <AssociationSet Name="FK_pm_lot_contractor_cm_contractor" Association="POM_DasanaModel.FK_pm_lot_contractor_cm_contractor">
+      <End Role="cm_contractor" EntitySet="cm_contractor" />
+      <End Role="pm_lot_contractor" EntitySet="pm_lot_contractor" />
+    </AssociationSet>
+    <EntitySet Name="ass_user" EntityType="POM_DasanaModel.ass_user" />
+    <AssociationSet Name="FK_ass_category_ass_user" Association="POM_DasanaModel.FK_ass_category_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_category" EntitySet="ass_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_ass_user" Association="POM_DasanaModel.FK_ass_complaint_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_location_ass_user" Association="POM_DasanaModel.FK_ass_location_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_location" EntitySet="ass_location" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_status_update_ass_user" Association="POM_DasanaModel.FK_ass_status_update_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_status_update" EntitySet="ass_status_update" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cm_contractor_ass_user" Association="POM_DasanaModel.FK_cm_contractor_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="cm_contractor" EntitySet="cm_contractor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_lot_contractor_ass_user" Association="POM_DasanaModel.FK_pm_lot_contractor_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="pm_lot_contractor" EntitySet="pm_lot_contractor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_user_ass_user" Association="POM_DasanaModel.FK_ass_user_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_user1" EntitySet="ass_user" />
+    </AssociationSet>
+    <EntitySet Name="cf_business" EntityType="POM_DasanaModel.cf_business" />
+    <EntitySet Name="pl_project" EntityType="POM_DasanaModel.pl_project" />
+    <EntitySet Name="pm_lot" EntityType="POM_DasanaModel.pm_lot" />
+    <EntitySet Name="pm_tenancy" EntityType="POM_DasanaModel.pm_tenancy" />
+    <AssociationSet Name="FK_pm_tenancy_cf_business" Association="POM_DasanaModel.FK_pm_tenancy_cf_business">
+      <End Role="cf_business" EntitySet="cf_business" />
+      <End Role="pm_tenancy" EntitySet="pm_tenancy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_lot_pl_project" Association="POM_DasanaModel.FK_pm_lot_pl_project">
+      <End Role="pl_project" EntitySet="pl_project" />
+      <End Role="pm_lot" EntitySet="pm_lot" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_tenancy_pl_project" Association="POM_DasanaModel.FK_pm_tenancy_pl_project">
+      <End Role="pl_project" EntitySet="pl_project" />
+      <End Role="pm_tenancy" EntitySet="pm_tenancy" />
+    </AssociationSet>
+    <AssociationSet Name="pm_tenancyass_complaint" Association="POM_DasanaModel.pm_tenancyass_complaint">
+      <End Role="pm_tenancy" EntitySet="pm_tenancy" />
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_reminder_ass_user" Association="POM_DasanaModel.FK_ass_reminder_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_reminder" EntitySet="ass_reminder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_reminder_ass_user_owner" Association="POM_DasanaModel.FK_ass_reminder_ass_user_owner">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_reminder" EntitySet="ass_reminder" />
+    </AssociationSet>
+    <EntitySet Name="ass_complaint_mail" EntityType="POM_DasanaModel.ass_complaint_mail" />
+    <AssociationSet Name="FK_ass_complaint_mail_ass_complaint" Association="POM_DasanaModel.FK_ass_complaint_mail_ass_complaint">
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+      <End Role="ass_complaint_mail" EntitySet="ass_complaint_mail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_complaint_mail_ass_user" Association="POM_DasanaModel.FK_ass_complaint_mail_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_complaint_mail" EntitySet="ass_complaint_mail" />
+    </AssociationSet>
+    <EntitySet Name="ass_migrate_closing" EntityType="POM_DasanaModel.ass_migrate_closing" />
+    <EntitySet Name="ass_migrate_lastmonth" EntityType="POM_DasanaModel.ass_migrate_lastmonth" />
+    <AssociationSet Name="FK_ass_migrate_closing_ass_migrate_lastmonth" Association="POM_DasanaModel.FK_ass_migrate_closing_ass_migrate_lastmonth">
+      <End Role="ass_migrate_lastmonth" EntitySet="ass_migrate_lastmonth" />
+      <End Role="ass_migrate_closing" EntitySet="ass_migrate_closing" />
+    </AssociationSet>
+    <AssociationSet Name="pl_projectass_migrate_lastmonth" Association="POM_DasanaModel.pl_projectass_migrate_lastmonth">
+      <End Role="pl_project" EntitySet="pl_project" />
+      <End Role="ass_migrate_lastmonth" EntitySet="ass_migrate_lastmonth" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_migrate_closing_ass_user" Association="POM_DasanaModel.FK_ass_migrate_closing_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_migrate_closing" EntitySet="ass_migrate_closing" />
+    </AssociationSet>
+    <EntitySet Name="ass_email_sender" EntityType="POM_DasanaModel.ass_email_sender" />
+    <EntitySet Name="ass_priority" EntityType="POM_DasanaModel.ass_priority" />
+    <AssociationSet Name="FK_ass_complaint_ass_priority" Association="POM_DasanaModel.FK_ass_complaint_ass_priority">
+      <End Role="ass_priority" EntitySet="ass_priority" />
+      <End Role="ass_complaint" EntitySet="ass_complaint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ass_priority_ass_user" Association="POM_DasanaModel.FK_ass_priority_ass_user">
+      <End Role="ass_user" EntitySet="ass_user" />
+      <End Role="ass_priority" EntitySet="ass_priority" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_ass_complaint_dtl_ass_status">
+    <End Type="POM_DasanaModel.ass_status" Role="ass_status" Multiplicity="0..1" />
+    <End Type="POM_DasanaModel.ass_complaint_dtl" Role="ass_complaint_dtl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_status">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_dtl">
+        <PropertyRef Name="curr_status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ass_status_flow">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="current_status" Type="Int32" Nullable="false" />
+    <Property Name="next_status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ass_status_current" Relationship="POM_DasanaModel.FK_ass_status_flow_ass_status" FromRole="ass_status_flow" ToRole="ass_status" />
+    <NavigationProperty Name="ass_status_next" Relationship="POM_DasanaModel.FK_ass_status_flow_ass_status1" FromRole="ass_status_flow" ToRole="ass_status" />
+    <Property Name="step_no" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_ass_status_flow_ass_status">
+    <End Type="POM_DasanaModel.ass_status" Role="ass_status" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_status_flow" Role="ass_status_flow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_status">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_flow">
+        <PropertyRef Name="current_status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_status_flow_ass_status1">
+    <End Type="POM_DasanaModel.ass_status" Role="ass_status" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_status_flow" Role="ass_status_flow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_status">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_flow">
+        <PropertyRef Name="next_status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ass_reminder">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descs" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="clases" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="start_day" Type="Int32" />
+    <Property Name="end_day" Type="Int32" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="owner_user" Type="Int32" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_ass_reminder_ass_user" FromRole="ass_reminder" ToRole="ass_user" />
+    <NavigationProperty Name="ass_user_owner" Relationship="POM_DasanaModel.FK_ass_reminder_ass_user_owner" FromRole="ass_reminder" ToRole="ass_user" />
+  </EntityType>
+  <EntityType Name="cm_contractor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="creditor_acct" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="trade" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="telp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cp_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ass_complaint" Relationship="POM_DasanaModel.FK_ass_complaint_cm_contractor" FromRole="cm_contractor" ToRole="ass_complaint" />
+    <NavigationProperty Name="pm_lot_contractor" Relationship="POM_DasanaModel.FK_pm_lot_contractor_cm_contractor" FromRole="cm_contractor" ToRole="pm_lot_contractor" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_cm_contractor_ass_user" FromRole="cm_contractor" ToRole="ass_user" />
+  </EntityType>
+  <Association Name="FK_ass_complaint_cm_contractor">
+    <End Type="POM_DasanaModel.cm_contractor" Role="cm_contractor" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_complaint" Role="ass_complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cm_contractor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint">
+        <PropertyRef Name="contractor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="pm_lot_contractor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="ent_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="project_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="lot_no" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="contractor_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cm_contractor" Relationship="POM_DasanaModel.FK_pm_lot_contractor_cm_contractor" FromRole="pm_lot_contractor" ToRole="cm_contractor" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_pm_lot_contractor_ass_user" FromRole="pm_lot_contractor" ToRole="ass_user" />
+  </EntityType>
+  <Association Name="FK_pm_lot_contractor_cm_contractor">
+    <End Type="POM_DasanaModel.cm_contractor" Role="cm_contractor" Multiplicity="1" />
+    <End Type="POM_DasanaModel.pm_lot_contractor" Role="pm_lot_contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cm_contractor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="pm_lot_contractor">
+        <PropertyRef Name="contractor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ass_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+    <Property Name="fullname" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ass_category" Relationship="POM_DasanaModel.FK_ass_category_ass_user" FromRole="ass_user" ToRole="ass_category" />
+    <NavigationProperty Name="ass_complaint" Relationship="POM_DasanaModel.FK_ass_complaint_ass_user" FromRole="ass_user" ToRole="ass_complaint" />
+    <NavigationProperty Name="ass_location" Relationship="POM_DasanaModel.FK_ass_location_ass_user" FromRole="ass_user" ToRole="ass_location" />
+    <NavigationProperty Name="ass_status_update" Relationship="POM_DasanaModel.FK_ass_status_update_ass_user" FromRole="ass_user" ToRole="ass_status_update" />
+    <NavigationProperty Name="cm_contractor" Relationship="POM_DasanaModel.FK_cm_contractor_ass_user" FromRole="ass_user" ToRole="cm_contractor" />
+    <NavigationProperty Name="pm_lot_contractor" Relationship="POM_DasanaModel.FK_pm_lot_contractor_ass_user" FromRole="ass_user" ToRole="pm_lot_contractor" />
+    <Property Name="audit_date" Type="DateTime" Precision="3" />
+    <Property Name="user_id" Type="Int32" />
+    <NavigationProperty Name="ass_user1" Relationship="POM_DasanaModel.FK_ass_user_ass_user" FromRole="ass_user" ToRole="ass_user1" />
+    <NavigationProperty Name="ass_user2" Relationship="POM_DasanaModel.FK_ass_user_ass_user" FromRole="ass_user1" ToRole="ass_user" />
+    <NavigationProperty Name="ass_reminder" Relationship="POM_DasanaModel.FK_ass_reminder_ass_user" FromRole="ass_user" ToRole="ass_reminder" />
+    <NavigationProperty Name="ass_reminder1" Relationship="POM_DasanaModel.FK_ass_reminder_ass_user_owner" FromRole="ass_user" ToRole="ass_reminder" />
+    <NavigationProperty Name="ass_complaint_mail" Relationship="POM_DasanaModel.FK_ass_complaint_mail_ass_user" FromRole="ass_user" ToRole="ass_complaint_mail" />
+    <NavigationProperty Name="ass_migrate_closing" Relationship="POM_DasanaModel.FK_ass_migrate_closing_ass_user" FromRole="ass_user" ToRole="ass_migrate_closing" />
+    <NavigationProperty Name="ass_priority" Relationship="POM_DasanaModel.FK_ass_priority_ass_user" FromRole="ass_user" ToRole="ass_priority" />
+  </EntityType>
+  <Association Name="FK_ass_category_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_category" Role="ass_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_category">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_complaint" Role="ass_complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_location_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_location" Role="ass_location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_location">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_status_update_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_status_update" Role="ass_status_update" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_status_update">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_cm_contractor_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.cm_contractor" Role="cm_contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cm_contractor">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_lot_contractor_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.pm_lot_contractor" Role="pm_lot_contractor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="pm_lot_contractor">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_user_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="0..1" />
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_user1">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="cf_business">
+    <Key>
+      <PropertyRef Name="business_id" />
+    </Key>
+    <Property Name="business_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="class_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="category" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="salutation" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="address1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="address2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="address3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="post_cd" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="tel_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="hand_phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="fax_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="birth_date" Type="DateTime" Precision="3" />
+    <Property Name="nationality" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="marital_status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="income_tax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="mail_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="mail_addr1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="mail_addr2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="mail_addr3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="mail_post_cd" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="co_name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="co_addr1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="co_addr2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="co_addr3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="co_post_cd" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="co_tel_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="co_fax_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="designation" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="contact_person" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="statement_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="interest" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="reminder" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="credit_terms" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="audit_user" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="religion_cd" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="pm_tenancy" Relationship="POM_DasanaModel.FK_pm_tenancy_cf_business" FromRole="cf_business" ToRole="pm_tenancy" />
+  </EntityType>
+  <EntityType Name="pl_project">
+    <Key>
+      <PropertyRef Name="entity_cd" />
+      <PropertyRef Name="project_no" />
+    </Key>
+    <Property Name="entity_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="project_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="project_date" Type="DateTime" Precision="3" />
+    <Property Name="project_ref" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="debtor_acct" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="debtor_type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="owner_type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="location" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="project_type" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="descs" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="award_date" Type="DateTime" Precision="3" />
+    <Property Name="start_date" Type="DateTime" Precision="3" />
+    <Property Name="completion_date" Type="DateTime" Precision="3" />
+    <Property Name="currency_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="contract_amt" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="auth_vo" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="claim_todate" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="ret_todate" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="ret_limit" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="ret_percent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="max_ret_percent" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="ret_release_date" Type="DateTime" Precision="3" />
+    <Property Name="penalty" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="min_claim_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="claim_interval" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="ret_acct" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="profit_acct" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="wip_acct" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="revenue_acct" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="memo_acct" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="project_rev_cd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ret_cd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="memo_cd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="est_cost" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="prev_recog_profit" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="project_status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="audit_user" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="project_factor" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="doc_no" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="claim_method" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="act_complete_dt" Type="DateTime" Precision="3" />
+    <Property Name="last_bill_date" Type="DateTime" Precision="3" />
+    <Property Name="div_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="dept_cd" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="activity_cd" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="wstatus" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="contact_person" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="contact_telno" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="contact_email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="designation" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="retention_activity_cd" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_lot" Relationship="POM_DasanaModel.FK_pm_lot_pl_project" FromRole="pl_project" ToRole="pm_lot" />
+    <NavigationProperty Name="pm_tenancy" Relationship="POM_DasanaModel.FK_pm_tenancy_pl_project" FromRole="pl_project" ToRole="pm_tenancy" />
+    <NavigationProperty Name="ass_migrate_lastmonth" Relationship="POM_DasanaModel.pl_projectass_migrate_lastmonth" FromRole="pl_project" ToRole="ass_migrate_lastmonth" />
+  </EntityType>
+  <EntityType Name="pm_lot">
+    <Key>
+      <PropertyRef Name="entity_cd" />
+      <PropertyRef Name="project_no" />
+      <PropertyRef Name="lot_no" />
+    </Key>
+    <Property Name="entity_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="project_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="lot_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="property_cd" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="descs" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="block_no" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="location_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="direction_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="theme_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="class_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="category_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="zone_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="level_no" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="area_uom" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="land_area" Type="Decimal" Precision="21" Scale="6" />
+    <Property Name="land_rate" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="land_tax_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="land_tax_amt" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="land_price" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="land_net_price" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="extra_land_area" Type="Decimal" Precision="21" Scale="6" />
+    <Property Name="extra_land_rate" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="extra_land_price" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="build_up_area" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="budget_cost" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="package_cd" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="package_price" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="package_tax_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="package_tax_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="package_net_price" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="other_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="other_tax_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="other_tax_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="other_net_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="min_selling_price" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="sold_date" Type="DateTime" Precision="3" />
+    <Property Name="sold_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="type_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="rental" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="rent_rate" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="rate_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="rent_type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="comm_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="bgt_rate" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="budget_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="share_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="rentable_area" Type="Decimal" Precision="21" Scale="6" />
+    <Property Name="tariff_percent" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="deposit_flag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="deposit_amt" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="owner_acct" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="addr1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="addr2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="addr3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="post_cd" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="pic_x" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="pic_y" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="prev_profit_recog" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+    <Property Name="sales_flag" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="rent_flag" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="ref_no" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="audit_user" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="area" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="rented_status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="pic_x_all" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="pic_y_all" Type="Decimal" Precision="12" Scale="0" />
+    <NavigationProperty Name="pl_project" Relationship="POM_DasanaModel.FK_pm_lot_pl_project" FromRole="pm_lot" ToRole="pl_project" />
+  </EntityType>
+  <EntityType Name="pm_tenancy">
+    <Key>
+      <PropertyRef Name="entity_cd" />
+      <PropertyRef Name="project_no" />
+      <PropertyRef Name="business_id" />
+      <PropertyRef Name="tenant_no" />
+    </Key>
+    <Property Name="entity_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="project_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="trade_name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="business_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="tenant_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="contract_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="commence_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="expiry_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="currency_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="apply_no" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="theme_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="class_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="category_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="staff" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="cr_terms" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="statements" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="reminder" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="interest" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="ten_solicitor" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="ten_solicitor_ref" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="solicitor" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="solicitor_ref" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="area" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="reason_cd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="audit_user" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="terminate_date" Type="DateTime" Precision="3" />
+    <Property Name="tarrif_percent" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="booking_date" Type="DateTime" Precision="3" />
+    <Property Name="contract_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="rental_basis" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="contract_sum" Type="Decimal" Precision="21" Scale="2" />
+    <Property Name="debtor_type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cf_business" Relationship="POM_DasanaModel.FK_pm_tenancy_cf_business" FromRole="pm_tenancy" ToRole="cf_business" />
+    <NavigationProperty Name="pl_project" Relationship="POM_DasanaModel.FK_pm_tenancy_pl_project" FromRole="pm_tenancy" ToRole="pl_project" />
+    <NavigationProperty Name="ass_complaint" Relationship="POM_DasanaModel.pm_tenancyass_complaint" FromRole="pm_tenancy" ToRole="ass_complaint" />
+  </EntityType>
+  <Association Name="FK_pm_tenancy_cf_business">
+    <End Type="POM_DasanaModel.cf_business" Role="cf_business" Multiplicity="1" />
+    <End Type="POM_DasanaModel.pm_tenancy" Role="pm_tenancy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cf_business">
+        <PropertyRef Name="business_id" />
+      </Principal>
+      <Dependent Role="pm_tenancy">
+        <PropertyRef Name="business_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_lot_pl_project">
+    <End Type="POM_DasanaModel.pl_project" Role="pl_project" Multiplicity="1" />
+    <End Type="POM_DasanaModel.pm_lot" Role="pm_lot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pl_project">
+        <PropertyRef Name="entity_cd" />
+        <PropertyRef Name="project_no" />
+      </Principal>
+      <Dependent Role="pm_lot">
+        <PropertyRef Name="entity_cd" />
+        <PropertyRef Name="project_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_tenancy_pl_project">
+    <End Type="POM_DasanaModel.pl_project" Role="pl_project" Multiplicity="1" />
+    <End Type="POM_DasanaModel.pm_tenancy" Role="pm_tenancy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pl_project">
+        <PropertyRef Name="entity_cd" />
+        <PropertyRef Name="project_no" />
+      </Principal>
+      <Dependent Role="pm_tenancy">
+        <PropertyRef Name="entity_cd" />
+        <PropertyRef Name="project_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pm_tenancyass_complaint">
+    <End Type="POM_DasanaModel.pm_tenancy" Role="pm_tenancy" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_complaint" Role="ass_complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_tenancy">
+        <PropertyRef Name="entity_cd" />
+        <PropertyRef Name="project_no" />
+        <PropertyRef Name="business_id" />
+        <PropertyRef Name="tenant_no" />
+      </Principal>
+      <Dependent Role="ass_complaint">
+        <PropertyRef Name="entity_cd" />
+        <PropertyRef Name="project_no" />
+        <PropertyRef Name="business_id" />
+        <PropertyRef Name="lot_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_reminder_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_reminder" Role="ass_reminder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_reminder">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_reminder_ass_user_owner">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="0..1" />
+    <End Type="POM_DasanaModel.ass_reminder" Role="ass_reminder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_reminder">
+        <PropertyRef Name="owner_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ass_complaint_mail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="comp_id" Type="Int32" Nullable="false" />
+    <Property Name="mail_no" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+    <Property Name="mail_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ass_complaint" Relationship="POM_DasanaModel.FK_ass_complaint_mail_ass_complaint" FromRole="ass_complaint_mail" ToRole="ass_complaint" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_ass_complaint_mail_ass_user" FromRole="ass_complaint_mail" ToRole="ass_user" />
+    <Property Name="email_to" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_ass_complaint_mail_ass_complaint">
+    <End Type="POM_DasanaModel.ass_complaint" Role="ass_complaint" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_complaint_mail" Role="ass_complaint_mail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_complaint">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_mail">
+        <PropertyRef Name="comp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_complaint_mail_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_complaint_mail" Role="ass_complaint_mail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint_mail">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ass_migrate_closing">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="migrate_id" Type="Int32" Nullable="false" />
+    <Property Name="closing" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ass_migrate_lastmonth" Relationship="POM_DasanaModel.FK_ass_migrate_closing_ass_migrate_lastmonth" FromRole="ass_migrate_closing" ToRole="ass_migrate_lastmonth" />
+    <Property Name="closing_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_ass_migrate_closing_ass_user" FromRole="ass_migrate_closing" ToRole="ass_user" />
+  </EntityType>
+  <EntityType Name="ass_migrate_lastmonth">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="ent_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="project_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="on_progress" Type="Int32" Nullable="false" />
+    <Property Name="closing" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ass_migrate_closing" Relationship="POM_DasanaModel.FK_ass_migrate_closing_ass_migrate_lastmonth" FromRole="ass_migrate_lastmonth" ToRole="ass_migrate_closing" />
+    <NavigationProperty Name="pl_project" Relationship="POM_DasanaModel.pl_projectass_migrate_lastmonth" FromRole="ass_migrate_lastmonth" ToRole="pl_project" />
+    <Property Name="cutoff_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_ass_migrate_closing_ass_migrate_lastmonth">
+    <End Type="POM_DasanaModel.ass_migrate_lastmonth" Role="ass_migrate_lastmonth" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_migrate_closing" Role="ass_migrate_closing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_migrate_lastmonth">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_migrate_closing">
+        <PropertyRef Name="migrate_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pl_projectass_migrate_lastmonth">
+    <End Type="POM_DasanaModel.pl_project" Role="pl_project" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_migrate_lastmonth" Role="ass_migrate_lastmonth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pl_project">
+        <PropertyRef Name="entity_cd" />
+        <PropertyRef Name="project_no" />
+      </Principal>
+      <Dependent Role="ass_migrate_lastmonth">
+        <PropertyRef Name="ent_cd" />
+        <PropertyRef Name="project_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_migrate_closing_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_migrate_closing" Role="ass_migrate_closing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_migrate_closing">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ass_email_sender">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ent_cd" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email_template" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ass_priority">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="descs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="audit_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ass_complaint" Relationship="POM_DasanaModel.FK_ass_complaint_ass_priority" FromRole="ass_priority" ToRole="ass_complaint" />
+    <NavigationProperty Name="ass_user" Relationship="POM_DasanaModel.FK_ass_priority_ass_user" FromRole="ass_priority" ToRole="ass_user" />
+  </EntityType>
+  <Association Name="FK_ass_complaint_ass_priority">
+    <End Type="POM_DasanaModel.ass_priority" Role="ass_priority" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_complaint" Role="ass_complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_priority">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_complaint">
+        <PropertyRef Name="priority_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ass_priority_ass_user">
+    <End Type="POM_DasanaModel.ass_user" Role="ass_user" Multiplicity="1" />
+    <End Type="POM_DasanaModel.ass_priority" Role="ass_priority" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ass_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ass_priority">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

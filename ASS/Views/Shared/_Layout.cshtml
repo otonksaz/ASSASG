@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - After Sales Service</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ASS", "Index", "AssReminder", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "AssReminder")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Complaint <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Complaint", "index", "Ass")</li>
+                            <li>@Html.ActionLink("All Complaint", "ViewAll", "ASS")</li>
+                            <li>@Html.ActionLink("Progress", "Create", "AssStatusUpdate")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Master <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Category", "index", "AssCategory")</li>
+                            <li>@Html.ActionLink("Location", "index", "AssLocation")</li>
+                            <li>@Html.ActionLink("Priority", "index", "AssPriority")</li>
+                            <li>@Html.ActionLink("Contractor", "index", "AssContractor")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Setting <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Setting Reminder", "index", "AssMtReminder")</li>
+                            <li>@Html.ActionLink("Email Template", "index", "AssEmailSender")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Report <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Rekap Item Komplain", "RekapItemKomplainView", "AssReport")</li>
+                            <li>@Html.ActionLink("Rekap Komplain per Kontraktor", "RekapKomplainKontraktorView", "AssReport")</li>
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>A.S.S - After Sales Service  &copy; @DateTime.Now.Year - ASG IT</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modalLoading" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <img src="~/Content/images/loading.gif" />
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

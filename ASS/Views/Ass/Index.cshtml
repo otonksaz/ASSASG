@@ -1,0 +1,95 @@
+﻿@model IEnumerable<ASS.Model.ass_complaint>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts{
+    <script type="text/javascript">        
+        function openReport(id) {
+            window.open('@Url.Content("~/AssReport/printOut/")' + id, "Print");
+        }
+
+        $(function () {
+            $('#datatable').DataTable({
+                "pageLength": 25
+            });
+        });
+    </script>
+}
+
+<h2>Complaint</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<hr />
+@*<table id="events-table" data-toggle="table" data-cache="false"
+       data-height="450" data-search="true" data-pagination="true" data-show-columns="true"
+       data-click-to-select="true" data-single-select="true">*@
+<table class="table table-bordered table-condensed" id="datatable">
+    <thead>
+        <tr>
+            <th>
+                NO.
+            </th>
+            <th>
+                Project No
+            </th>
+            <th>
+                Unit
+            </th>
+            <th>
+                CP Name
+            </th>
+            <th>
+                CP Telp
+            </th>
+            <th>
+                CheckList Date
+            </th>
+            <th>
+                Contractor
+            </th>
+            <th>
+                Last Progress
+            </th>
+            <th width="90"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.project_no)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lot_no)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cp_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cp_telp)
+                </td>
+                <td>
+                    @item.check_date.ToString("dd-MM-yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cm_contractor.trade)
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.lastStatus)</td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.id }, htmlAttributes: new { @class = "glyphicon glyphicon-edit" })
+                    @Html.ActionLink(" ", "Details", new { id = item.id }, htmlAttributes: new { @class = "glyphicon glyphicon-list" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.id }, htmlAttributes: new { @class = "glyphicon glyphicon-trash" })
+                    <a href="#" id="aPrint" onclick="openReport(@item.id)" class="glyphicon glyphicon-print"> </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

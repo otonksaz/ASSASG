@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ASS.Models.ViewReminderUnitProgress>
+@{
+    ViewBag.Title = "ReminderUnitProgress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(function(){
+            $(".table-reminder tr").click(function () {
+                var rowIndex = this.rowIndex;
+                if (rowIndex == 0){
+                    return;
+                }
+                else {
+                    var entCd = $("#entCd-" + rowIndex).val();
+                    var projectNo = $("#projectNo-" + rowIndex).val();
+                    var lotNo = $("#lotNo-" + rowIndex).val();
+                    window.location.href = '@Url.Content("~/AssReminder/ProgressComplainByUnit?entCd=")' + entCd + '&projectNo=' + projectNo + '&lotNo=' + lotNo;
+                }
+            });
+        });
+    </script>
+}
+
+<h2>Progress - @Model.FirstOrDefault().progressName</h2>
+
+<table class="table table-hover table-reminder">
+    <tr>
+        <th>#</th>
+        <th>Project</th>
+        <th>Unit</th>
+        <th>Checklist Date</th>
+        <th>Complaint</th>
+    </tr>
+    @{int no = 1;}
+    @foreach (var dtl in Model)
+    {
+        <tr>
+            <td>
+            @no
+                <input type="hidden" id="entCd-@no" value="@dtl.entCd" />
+                <input type="hidden" id="projectNo-@no" value="@dtl.projectNo" />
+                <input type="hidden" id="lotNo-@no" value="@dtl.lotNo" />
+            </td>
+            <td>@dtl.projectNo</td>
+            <td>@dtl.lotNo</td>
+            <td>@dtl.checkDate.ToString("dd-MM-yyyy")</td>
+            <td>@dtl.countProgress</td>
+        </tr>
+        no++;
+    }
+</table>
+

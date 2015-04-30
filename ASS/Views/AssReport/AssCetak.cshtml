@@ -1,0 +1,108 @@
+﻿@model ASS.Model.ass_complaint
+@{
+    ViewBag.Title = "AssCetak";
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+}
+
+<style type="text/css">
+    .table-report tr th{
+        text-align : center;
+        width : 100%;
+    }
+
+    #paper {
+        height : 850px;
+        width : 1150px;
+        padding : 10px;
+    }
+</style>
+
+<div id="paper">
+    <h4 style="text-align:center">FORM CHECKLIST SETELAH SERAH TERIMA</h4>
+    <table class="table">
+        <tr>
+            <td><label>Nama Pemilik</label></td>
+            <td>@Model.cp_name</td>
+            <td><label>Tgl Checklist</label></td>
+            <td>@Model.check_date.ToString("dd-MM-yyyy")</td>
+        </tr>
+        <tr>
+            <td><label>No Telp</label></td>
+            <td>@Model.cp_telp</td>
+            <td><label>Tgl. Target Selesai</label></td>
+            <td>@Model.ass_complaint_dtl.OrderByDescending(a => a.due_date).FirstOrDefault().due_date.ToString("dd-MM-yyyy")</td>
+        </tr>
+        <tr>
+            <td><label>Alamat Unit</label></td>
+            <td>@Model.lot_no</td>
+            <td><label>Nama Kontraktor</label></td>
+            <td>@Model.cm_contractor.trade</td>
+        </tr>
+        <tr>
+            <td><label>Email</label></td>
+            <td>@Model.cp_email</td>
+            <td><label>Nama Pengawas</label></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><label>BAST</label></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <table class="table table-bordered table-report">
+        <thead>
+            <tr>
+                <th rowspan="2" style="width:30px">NO</th>
+                <th rowspan="2">URAIAN CHECKLIST</th>
+                <th colspan="2" style="width:100px">HASIL PEMERIKSAAN</th>
+                <th rowspan="2" style="width:300px">KETERANGAN</th>
+            </tr>
+            <tr>
+                <th>BAIK</th>
+                <th>TIDAK</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int no = 1;}
+            @foreach (ASS.Model.ass_complaint_dtl dtl in Model.ass_complaint_dtl.ToList())
+            {
+                <tr>
+                    <td>@no</td>
+                    <td>@dtl.ass_category.name @dtl.ass_location.name @dtl.descs</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                no++;
+            }
+        </tbody>
+    </table>
+    <br />
+    <table class="table table-bordered table-report">
+        <tr>
+            <th colspan="3" style="width:525px;">TANGGAL PEMERIKSAAN</th>
+            <th style="border:none;"></th>
+            <th colspan="3" style="width:525px;">TANGGAL PENYELESAIAN CHECKLIST</th>
+        </tr>
+        <tr>
+            <th style="width:175px;">PEMILIK</th>
+            <th style="width:175px;">A.S.S</th>
+            <th style="width:175px;">PROJECT</th>
+            <th style="border:none;"></th>
+            <th style="width:175px;">PEMILIK</th>
+            <th style="width:175px;">A.S.S</th>
+            <th style="width:175px;">PROJECT</th>
+        </tr>
+        <tr style="height:100px;">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border:none;"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,51 @@
+﻿@model ASS.Model.ass_priority
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ass_priority</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.audit_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.audit_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ass_user.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_user.username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

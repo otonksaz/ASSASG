@@ -1,0 +1,108 @@
+﻿@model ASS.Model.ass_status_update
+
+@{
+    ViewBag.Title = "Status Update";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            selectUnit = function(row)  {
+                $("#tbUnit").val(row.lotNo);
+                $("#tbOwnerName").val(row.busName);
+                $("#tbOwnerTelp").val(row.busTelp);
+                $("#tbOwnerEmail").val(row.email);
+                $("#bast").val(row.bast);
+                $("#entCd").val(row.entCd);
+                $("#projectNo").val(row.projectNo);
+
+                $("#myModal").modal('hide');
+                
+                $("#messageResult").html('');
+                $("#tblDtl").html('<img src="/Content/images/loader-small.gif" />Loading...');
+                $("#tblDtl").load('@Url.Content("~/AssStatusUpdate/GetComplaintDtlByUnit/")',
+                    { entCd: row.entCd, projectNo : row.projectNo, lotNo : row.lotNo });
+            }
+
+            $('#events-table').bootstrapTable({
+            }).on('dbl-click-row.bs.table', function (e, row, $element) {
+                selectUnit(row);
+            });
+
+            $("#btSelect").click(function () {
+                selectUnit($("#events-table").bootstrapTable('getSelections')[0]);
+            });
+        });
+    </script>
+}
+
+<h2>Status Update</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <label class="control-label col-md-4">Unit</label>
+        <div class="col-lg-8">
+            <div class="input-group">
+                <input type="text" id="tbUnit" name="tbUnit" class="form-control" placeholder="">
+                @Html.Hidden("entCd")
+                @Html.Hidden("projectNo")
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">...</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div>
+    <div class="col-md-6">
+        <label class="control-label col-md-4">Owner Telp</label>
+        <div class="col-lg-8">
+            @Html.TextBox("tbOwnerTelp", "", new { @class = "form-control", @readonly = "true" })
+        </div><!-- /.col-lg-6 -->
+    </div>
+    <div class="col-md-6">
+        <label class="control-label col-md-4">Owner Name</label>
+        <div class="col-lg-8">
+            @Html.TextBox("tbOwnerName", "", new { @class = "form-control", @readonly = "true" })
+        </div><!-- /.col-lg-6 -->
+    </div>
+    <div class="col-md-6">
+        <label class="control-label col-md-4">Owner Email</label>
+        <div class="col-lg-8">
+            @Html.TextBox("tbOwnerEmail", "", new { @class = "form-control", @readonly = "true" })
+        </div><!-- /.col-lg-6 -->
+    </div>
+</div><!-- /.row -->
+
+<br />
+
+<div id="messageResult"></div>
+<div id="tblDtl"></div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Select Unit</h4>
+            </div>
+            <div class="modal-body">
+                <table id="events-table" data-toggle="table" data-url="@Url.Content("~/AssStatusUpdate/GetLotComplaint")" data-cache="false"
+                       data-height="299" data-search="true" data-pagination="true" data-show-columns="true"
+                       data-click-to-select="true" data-single-select="true">
+                    <thead>
+                        <tr>
+                            <th data-field="state" data-checkbox="true"></th>
+                            <th data-field="lotNo">Unit</th>
+                            <th data-field="busName">Business Name</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btSelect">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

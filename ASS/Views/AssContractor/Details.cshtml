@@ -1,0 +1,59 @@
+﻿@model ASS.Model.cm_contractor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>cm_contractor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Creditor Acct
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.creditor_acct)
+        </dd>
+
+        <dt>
+            Creditor Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trade)
+        </dd>
+
+        <dt>
+            Address
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            Telp
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telp)
+        </dd>
+
+        <dt>
+            Contact Person
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cp_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

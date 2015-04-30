@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ASS.Model.cm_contractor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Creditor Acct
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Telp
+        </th>
+        <th>
+            CP Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.creditor_acct)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.trade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cp_name)
+        </td>
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id = item.id }, htmlAttributes: new { @class = "glyphicon glyphicon-edit" })
+            @Html.ActionLink(" ", "Details", new { id = item.id }, htmlAttributes: new { @class = "glyphicon glyphicon-list" })
+            @Html.ActionLink(" ", "Delete", new { id = item.id }, htmlAttributes: new { @class = "glyphicon glyphicon-trash" })
+        </td>
+    </tr>
+}
+
+</table>

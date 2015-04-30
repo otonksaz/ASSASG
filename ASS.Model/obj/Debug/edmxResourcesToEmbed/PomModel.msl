@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="POM_DasanaModelStoreContainer" CdmEntityContainer="POM_DasanaEntities">
+    <EntitySetMapping Name="ass_category">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_category">
+        <MappingFragment StoreEntitySet="ass_category">
+          <ScalarProperty Name="is_main" ColumnName="is_main" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="descs" ColumnName="descs" />
+          <ScalarProperty Name="work_duration" ColumnName="work_duration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_complaint">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_complaint">
+        <MappingFragment StoreEntitySet="ass_complaint">
+          <ScalarProperty Name="priority_id" ColumnName="priority_id" />
+          <ScalarProperty Name="cancel_date" ColumnName="cancel_date" />
+          <ScalarProperty Name="controller_name" ColumnName="controller_name" />
+          <ScalarProperty Name="closing_date" ColumnName="closing_date" />
+          <ScalarProperty Name="cp_email" ColumnName="cp_email" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="complaint_cd" ColumnName="complaint_cd" />
+          <ScalarProperty Name="entity_cd" ColumnName="entity_cd" />
+          <ScalarProperty Name="project_no" ColumnName="project_no" />
+          <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+          <ScalarProperty Name="business_id" ColumnName="business_id" />
+          <ScalarProperty Name="cp_name" ColumnName="cp_name" />
+          <ScalarProperty Name="cp_telp" ColumnName="cp_telp" />
+          <ScalarProperty Name="check_date" ColumnName="check_date" />
+          <ScalarProperty Name="contractor_id" ColumnName="contractor_id" />
+          <ScalarProperty Name="descs" ColumnName="descs" />
+          <ScalarProperty Name="input_date" ColumnName="input_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="attach_file" ColumnName="attach_file" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_complaint_dtl">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_complaint_dtl">
+        <MappingFragment StoreEntitySet="ass_complaint_dtl">
+          <ScalarProperty Name="curr_status_id" ColumnName="curr_status_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="comp_id" ColumnName="comp_id" />
+          <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+          <ScalarProperty Name="location_id" ColumnName="location_id" />
+          <ScalarProperty Name="descs" ColumnName="descs" />
+          <ScalarProperty Name="due_date" ColumnName="due_date" />
+          <ScalarProperty Name="attach_file" ColumnName="attach_file" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_location">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_location">
+        <MappingFragment StoreEntitySet="ass_location">
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="descs" ColumnName="descs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_status">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_status">
+        <MappingFragment StoreEntitySet="ass_status">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="descs" ColumnName="descs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_status_update">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_status_update">
+        <MappingFragment StoreEntitySet="ass_status_update">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="compdtl_id" ColumnName="compdtl_id" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="status_date" ColumnName="status_date" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_status_flow">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_status_flow">
+        <MappingFragment StoreEntitySet="ass_status_flow">
+          <ScalarProperty Name="step_no" ColumnName="step_no" />
+          <ScalarProperty Name="next_status" ColumnName="next_status" />
+          <ScalarProperty Name="current_status" ColumnName="current_status" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_reminder">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_reminder">
+        <MappingFragment StoreEntitySet="ass_reminder">
+          <ScalarProperty Name="owner_user" ColumnName="owner_user" />
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="end_day" ColumnName="end_day" />
+          <ScalarProperty Name="start_day" ColumnName="start_day" />
+          <ScalarProperty Name="clases" ColumnName="clases" />
+          <ScalarProperty Name="descs" ColumnName="descs" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cm_contractor">
+      <EntityTypeMapping TypeName="POM_DasanaModel.cm_contractor">
+        <MappingFragment StoreEntitySet="cm_contractor">
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="cp_name" ColumnName="cp_name" />
+          <ScalarProperty Name="telp" ColumnName="telp" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="trade" ColumnName="trade" />
+          <ScalarProperty Name="creditor_acct" ColumnName="creditor_acct" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_lot_contractor">
+      <EntityTypeMapping TypeName="POM_DasanaModel.pm_lot_contractor">
+        <MappingFragment StoreEntitySet="pm_lot_contractor">
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="contractor_id" ColumnName="contractor_id" />
+          <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+          <ScalarProperty Name="project_no" ColumnName="project_no" />
+          <ScalarProperty Name="ent_cd" ColumnName="ent_cd" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_user">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_user">
+        <MappingFragment StoreEntitySet="ass_user">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cf_business">
+      <EntityTypeMapping TypeName="POM_DasanaModel.cf_business">
+        <MappingFragment StoreEntitySet="cf_business">
+          <ScalarProperty Name="religion_cd" ColumnName="religion_cd" />
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="audit_user" ColumnName="audit_user" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="credit_terms" ColumnName="credit_terms" />
+          <ScalarProperty Name="reminder" ColumnName="reminder" />
+          <ScalarProperty Name="interest" ColumnName="interest" />
+          <ScalarProperty Name="statement_type" ColumnName="statement_type" />
+          <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="co_fax_no" ColumnName="co_fax_no" />
+          <ScalarProperty Name="co_tel_no" ColumnName="co_tel_no" />
+          <ScalarProperty Name="co_post_cd" ColumnName="co_post_cd" />
+          <ScalarProperty Name="co_addr3" ColumnName="co_addr3" />
+          <ScalarProperty Name="co_addr2" ColumnName="co_addr2" />
+          <ScalarProperty Name="co_addr1" ColumnName="co_addr1" />
+          <ScalarProperty Name="co_name" ColumnName="co_name" />
+          <ScalarProperty Name="mail_post_cd" ColumnName="mail_post_cd" />
+          <ScalarProperty Name="mail_addr3" ColumnName="mail_addr3" />
+          <ScalarProperty Name="mail_addr2" ColumnName="mail_addr2" />
+          <ScalarProperty Name="mail_addr1" ColumnName="mail_addr1" />
+          <ScalarProperty Name="mail_type" ColumnName="mail_type" />
+          <ScalarProperty Name="income_tax" ColumnName="income_tax" />
+          <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+          <ScalarProperty Name="nationality" ColumnName="nationality" />
+          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="fax_no" ColumnName="fax_no" />
+          <ScalarProperty Name="hand_phone" ColumnName="hand_phone" />
+          <ScalarProperty Name="tel_no" ColumnName="tel_no" />
+          <ScalarProperty Name="post_cd" ColumnName="post_cd" />
+          <ScalarProperty Name="address3" ColumnName="address3" />
+          <ScalarProperty Name="address2" ColumnName="address2" />
+          <ScalarProperty Name="address1" ColumnName="address1" />
+          <ScalarProperty Name="salutation" ColumnName="salutation" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="class_cd" ColumnName="class_cd" />
+          <ScalarProperty Name="business_id" ColumnName="business_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pl_project">
+      <EntityTypeMapping TypeName="POM_DasanaModel.pl_project">
+        <MappingFragment StoreEntitySet="pl_project">
+          <ScalarProperty Name="retention_activity_cd" ColumnName="retention_activity_cd" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="contact_email" ColumnName="contact_email" />
+          <ScalarProperty Name="contact_telno" ColumnName="contact_telno" />
+          <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+          <ScalarProperty Name="wstatus" ColumnName="wstatus" />
+          <ScalarProperty Name="activity_cd" ColumnName="activity_cd" />
+          <ScalarProperty Name="dept_cd" ColumnName="dept_cd" />
+          <ScalarProperty Name="div_cd" ColumnName="div_cd" />
+          <ScalarProperty Name="last_bill_date" ColumnName="last_bill_date" />
+          <ScalarProperty Name="act_complete_dt" ColumnName="act_complete_dt" />
+          <ScalarProperty Name="claim_method" ColumnName="claim_method" />
+          <ScalarProperty Name="doc_no" ColumnName="doc_no" />
+          <ScalarProperty Name="project_factor" ColumnName="project_factor" />
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="audit_user" ColumnName="audit_user" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="project_status" ColumnName="project_status" />
+          <ScalarProperty Name="prev_recog_profit" ColumnName="prev_recog_profit" />
+          <ScalarProperty Name="est_cost" ColumnName="est_cost" />
+          <ScalarProperty Name="memo_cd" ColumnName="memo_cd" />
+          <ScalarProperty Name="ret_cd" ColumnName="ret_cd" />
+          <ScalarProperty Name="project_rev_cd" ColumnName="project_rev_cd" />
+          <ScalarProperty Name="memo_acct" ColumnName="memo_acct" />
+          <ScalarProperty Name="revenue_acct" ColumnName="revenue_acct" />
+          <ScalarProperty Name="wip_acct" ColumnName="wip_acct" />
+          <ScalarProperty Name="profit_acct" ColumnName="profit_acct" />
+          <ScalarProperty Name="ret_acct" ColumnName="ret_acct" />
+          <ScalarProperty Name="claim_interval" ColumnName="claim_interval" />
+          <ScalarProperty Name="min_claim_amt" ColumnName="min_claim_amt" />
+          <ScalarProperty Name="penalty" ColumnName="penalty" />
+          <ScalarProperty Name="ret_release_date" ColumnName="ret_release_date" />
+          <ScalarProperty Name="max_ret_percent" ColumnName="max_ret_percent" />
+          <ScalarProperty Name="ret_percent" ColumnName="ret_percent" />
+          <ScalarProperty Name="ret_limit" ColumnName="ret_limit" />
+          <ScalarProperty Name="ret_todate" ColumnName="ret_todate" />
+          <ScalarProperty Name="claim_todate" ColumnName="claim_todate" />
+          <ScalarProperty Name="auth_vo" ColumnName="auth_vo" />
+          <ScalarProperty Name="contract_amt" ColumnName="contract_amt" />
+          <ScalarProperty Name="currency_cd" ColumnName="currency_cd" />
+          <ScalarProperty Name="completion_date" ColumnName="completion_date" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="award_date" ColumnName="award_date" />
+          <ScalarProperty Name="descs" ColumnName="descs" />
+          <ScalarProperty Name="project_type" ColumnName="project_type" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="owner_type" ColumnName="owner_type" />
+          <ScalarProperty Name="debtor_type" ColumnName="debtor_type" />
+          <ScalarProperty Name="debtor_acct" ColumnName="debtor_acct" />
+          <ScalarProperty Name="project_ref" ColumnName="project_ref" />
+          <ScalarProperty Name="project_date" ColumnName="project_date" />
+          <ScalarProperty Name="project_no" ColumnName="project_no" />
+          <ScalarProperty Name="entity_cd" ColumnName="entity_cd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_lot">
+      <EntityTypeMapping TypeName="POM_DasanaModel.pm_lot">
+        <MappingFragment StoreEntitySet="pm_lot">
+          <ScalarProperty Name="pic_y_all" ColumnName="pic_y_all" />
+          <ScalarProperty Name="pic_x_all" ColumnName="pic_x_all" />
+          <ScalarProperty Name="rented_status" ColumnName="rented_status" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="audit_user" ColumnName="audit_user" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="ref_no" ColumnName="ref_no" />
+          <ScalarProperty Name="rent_flag" ColumnName="rent_flag" />
+          <ScalarProperty Name="sales_flag" ColumnName="sales_flag" />
+          <ScalarProperty Name="prev_profit_recog" ColumnName="prev_profit_recog" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="pic_y" ColumnName="pic_y" />
+          <ScalarProperty Name="pic_x" ColumnName="pic_x" />
+          <ScalarProperty Name="post_cd" ColumnName="post_cd" />
+          <ScalarProperty Name="addr3" ColumnName="addr3" />
+          <ScalarProperty Name="addr2" ColumnName="addr2" />
+          <ScalarProperty Name="addr1" ColumnName="addr1" />
+          <ScalarProperty Name="owner_acct" ColumnName="owner_acct" />
+          <ScalarProperty Name="deposit_amt" ColumnName="deposit_amt" />
+          <ScalarProperty Name="deposit_flag" ColumnName="deposit_flag" />
+          <ScalarProperty Name="tariff_percent" ColumnName="tariff_percent" />
+          <ScalarProperty Name="rentable_area" ColumnName="rentable_area" />
+          <ScalarProperty Name="share_amt" ColumnName="share_amt" />
+          <ScalarProperty Name="budget_amt" ColumnName="budget_amt" />
+          <ScalarProperty Name="bgt_rate" ColumnName="bgt_rate" />
+          <ScalarProperty Name="comm_amt" ColumnName="comm_amt" />
+          <ScalarProperty Name="rent_type" ColumnName="rent_type" />
+          <ScalarProperty Name="rate_type" ColumnName="rate_type" />
+          <ScalarProperty Name="rent_rate" ColumnName="rent_rate" />
+          <ScalarProperty Name="rental" ColumnName="rental" />
+          <ScalarProperty Name="type_amt" ColumnName="type_amt" />
+          <ScalarProperty Name="sold_type" ColumnName="sold_type" />
+          <ScalarProperty Name="sold_date" ColumnName="sold_date" />
+          <ScalarProperty Name="min_selling_price" ColumnName="min_selling_price" />
+          <ScalarProperty Name="other_net_amt" ColumnName="other_net_amt" />
+          <ScalarProperty Name="other_tax_amt" ColumnName="other_tax_amt" />
+          <ScalarProperty Name="other_tax_cd" ColumnName="other_tax_cd" />
+          <ScalarProperty Name="other_amt" ColumnName="other_amt" />
+          <ScalarProperty Name="package_net_price" ColumnName="package_net_price" />
+          <ScalarProperty Name="package_tax_amt" ColumnName="package_tax_amt" />
+          <ScalarProperty Name="package_tax_cd" ColumnName="package_tax_cd" />
+          <ScalarProperty Name="package_price" ColumnName="package_price" />
+          <ScalarProperty Name="package_cd" ColumnName="package_cd" />
+          <ScalarProperty Name="budget_cost" ColumnName="budget_cost" />
+          <ScalarProperty Name="build_up_area" ColumnName="build_up_area" />
+          <ScalarProperty Name="extra_land_price" ColumnName="extra_land_price" />
+          <ScalarProperty Name="extra_land_rate" ColumnName="extra_land_rate" />
+          <ScalarProperty Name="extra_land_area" ColumnName="extra_land_area" />
+          <ScalarProperty Name="land_net_price" ColumnName="land_net_price" />
+          <ScalarProperty Name="land_price" ColumnName="land_price" />
+          <ScalarProperty Name="land_tax_amt" ColumnName="land_tax_amt" />
+          <ScalarProperty Name="land_tax_cd" ColumnName="land_tax_cd" />
+          <ScalarProperty Name="land_rate" ColumnName="land_rate" />
+          <ScalarProperty Name="land_area" ColumnName="land_area" />
+          <ScalarProperty Name="area_uom" ColumnName="area_uom" />
+          <ScalarProperty Name="level_no" ColumnName="level_no" />
+          <ScalarProperty Name="zone_cd" ColumnName="zone_cd" />
+          <ScalarProperty Name="category_cd" ColumnName="category_cd" />
+          <ScalarProperty Name="class_cd" ColumnName="class_cd" />
+          <ScalarProperty Name="theme_cd" ColumnName="theme_cd" />
+          <ScalarProperty Name="direction_cd" ColumnName="direction_cd" />
+          <ScalarProperty Name="location_cd" ColumnName="location_cd" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="block_no" ColumnName="block_no" />
+          <ScalarProperty Name="descs" ColumnName="descs" />
+          <ScalarProperty Name="property_cd" ColumnName="property_cd" />
+          <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+          <ScalarProperty Name="project_no" ColumnName="project_no" />
+          <ScalarProperty Name="entity_cd" ColumnName="entity_cd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_tenancy">
+      <EntityTypeMapping TypeName="POM_DasanaModel.pm_tenancy">
+        <MappingFragment StoreEntitySet="pm_tenancy">
+          <ScalarProperty Name="debtor_type" ColumnName="debtor_type" />
+          <ScalarProperty Name="contract_sum" ColumnName="contract_sum" />
+          <ScalarProperty Name="rental_basis" ColumnName="rental_basis" />
+          <ScalarProperty Name="contract_no" ColumnName="contract_no" />
+          <ScalarProperty Name="booking_date" ColumnName="booking_date" />
+          <ScalarProperty Name="tarrif_percent" ColumnName="tarrif_percent" />
+          <ScalarProperty Name="terminate_date" ColumnName="terminate_date" />
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="audit_user" ColumnName="audit_user" />
+          <ScalarProperty Name="reason_cd" ColumnName="reason_cd" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="solicitor_ref" ColumnName="solicitor_ref" />
+          <ScalarProperty Name="solicitor" ColumnName="solicitor" />
+          <ScalarProperty Name="ten_solicitor_ref" ColumnName="ten_solicitor_ref" />
+          <ScalarProperty Name="ten_solicitor" ColumnName="ten_solicitor" />
+          <ScalarProperty Name="interest" ColumnName="interest" />
+          <ScalarProperty Name="reminder" ColumnName="reminder" />
+          <ScalarProperty Name="statements" ColumnName="statements" />
+          <ScalarProperty Name="cr_terms" ColumnName="cr_terms" />
+          <ScalarProperty Name="staff" ColumnName="staff" />
+          <ScalarProperty Name="category_cd" ColumnName="category_cd" />
+          <ScalarProperty Name="class_cd" ColumnName="class_cd" />
+          <ScalarProperty Name="theme_cd" ColumnName="theme_cd" />
+          <ScalarProperty Name="apply_no" ColumnName="apply_no" />
+          <ScalarProperty Name="currency_cd" ColumnName="currency_cd" />
+          <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+          <ScalarProperty Name="commence_date" ColumnName="commence_date" />
+          <ScalarProperty Name="contract_date" ColumnName="contract_date" />
+          <ScalarProperty Name="tenant_no" ColumnName="tenant_no" />
+          <ScalarProperty Name="business_id" ColumnName="business_id" />
+          <ScalarProperty Name="trade_name" ColumnName="trade_name" />
+          <ScalarProperty Name="project_no" ColumnName="project_no" />
+          <ScalarProperty Name="entity_cd" ColumnName="entity_cd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_complaint_mail">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_complaint_mail">
+        <MappingFragment StoreEntitySet="ass_complaint_mail">
+          <ScalarProperty Name="email_to" ColumnName="email_to" />
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="mail_date" ColumnName="mail_date" />
+          <ScalarProperty Name="mail_no" ColumnName="mail_no" />
+          <ScalarProperty Name="comp_id" ColumnName="comp_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_migrate_closing">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_migrate_closing">
+        <MappingFragment StoreEntitySet="ass_migrate_closing">
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="closing_date" ColumnName="closing_date" />
+          <ScalarProperty Name="closing" ColumnName="closing" />
+          <ScalarProperty Name="migrate_id" ColumnName="migrate_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_migrate_lastmonth">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_migrate_lastmonth">
+        <MappingFragment StoreEntitySet="ass_migrate_lastmonth">
+          <ScalarProperty Name="cutoff_date" ColumnName="cutoff_date" />
+          <ScalarProperty Name="closing" ColumnName="closing" />
+          <ScalarProperty Name="on_progress" ColumnName="on_progress" />
+          <ScalarProperty Name="project_no" ColumnName="project_no" />
+          <ScalarProperty Name="ent_cd" ColumnName="ent_cd" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_email_sender">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_email_sender">
+        <MappingFragment StoreEntitySet="ass_email_sender">
+          <ScalarProperty Name="email_template" ColumnName="email_template" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="ent_cd" ColumnName="ent_cd" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ass_priority">
+      <EntityTypeMapping TypeName="POM_DasanaModel.ass_priority">
+        <MappingFragment StoreEntitySet="ass_priority">
+          <ScalarProperty Name="audit_date" ColumnName="audit_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="descs" ColumnName="descs" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

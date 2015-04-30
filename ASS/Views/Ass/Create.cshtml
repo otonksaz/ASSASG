@@ -1,0 +1,423 @@
+﻿@model ASS.Model.ass_complaint
+
+@{
+    ViewBag.Title = "Complaint";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+    $(document).ready(function () {
+        //# GET LOT
+
+        var lotsSource =
+        {
+            dataType: "json",
+            dataFields: [
+                { name: 'entCd', type: 'string' },
+                { name: 'lotNo', type: 'string' },
+                { name: 'projectNo', type: 'string' },
+                { name: 'busId', type: 'string' },
+                { name: 'busName', type: 'string' },
+                { name: 'busTelp', type: 'string' },
+                { name: 'bast', type: 'string' },
+                { name: 'email', type: 'string' }
+            ],
+            id: 'id',
+            url: '@Url.Content("~/PMTenancy/getlot")'
+        };
+        var lotsAdapter = new $.jqx.dataAdapter(lotsSource);
+
+        $("#cbLotNo").jqxDropDownButton({ width: 150, height: 25 });
+
+        $("#gridLotNo").jqxGrid(
+        {
+            width: 700,
+            source: lotsAdapter,
+            pageable: true,
+            autoheight: true,
+            columnsresize: true,
+            showfilterrow: true,
+            filterable: true,
+            sortable: true,
+            columns: [
+              { text: 'Lot No', columntype: 'textbox', datafield: 'lotNo', width: 90 },
+              { text: 'Business ID', datafield: 'busId', columntype: 'textbox', width: 90 },
+              { text: 'Business Name', columntype: 'textbox', datafield: 'busName' },
+              { text: 'Telp', datafield: 'busTelp', width: 120 },
+              { text: 'Email', datafield: 'email', width: 120 },
+              { text: 'BAST', datafield: 'bast', width: 120 }
+            ]
+        });
+        $("#gridLotNo").on('rowselect', function (event) {
+            var args = event.args;
+            var row = $("#gridLotNo").jqxGrid('getrowdata', args.rowindex);
+
+            $("#tbOwnerName").val(row["busName"]);
+            $("#tbOwnerTelp").val(row["busTelp"]);            
+            $("#tbOwnerEmail").val(row["email"]);
+
+            $("#cp_name").val(row["busName"]);
+            $("#cp_telp").val(row["busTelp"]);
+            $("#bast").val(row["bast"]);
+            $("#cp_email").val(row["email"]);
+            $("#entCd").val(row["entCd"]);
+            $("#projectNo").val(row["projectNo"]);
+            $("#businessId").val(row["busId"]);
+            $("#lotNo").val(row["lotNo"]);
+
+            var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + row['lotNo'] + '</div>';
+            $("#cbLotNo").jqxDropDownButton('setContent', dropDownContent);
+        });
+
+        //#--------------------------------------------------------------------------------------------------
+        //#Bind Contractor
+        var contractorsSource =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'contractor_id', type: "string" },
+                    { name: 'creditor_acct', type: "string" },
+                    { name: 'trade', type: "string" },
+                    { name: 'experience', type: "string" }
+                ],
+                url: '@Url.Content("~/AssContractor/getContractors")',
+                async: false
+            };
+        var contractorsAdapter = new $.jqx.dataAdapter(contractorsSource);
+        // Create a jqxComboBox
+        $("#cbContractor").jqxComboBox({ selectedIndex: 0, source: contractorsAdapter, displayMember: "trade", valueMember: "contractor_id", width: 200, height: 25 });
+        // trigger the select event.
+        $("#cbContractor").on('select', function (event) {
+            if (event.args) {
+                var item = event.args.item;
+                if (item) {
+                    $("#contractorId").val(item.value);
+                }
+            }
+        });
+        //#--------------------------------------------------------------------------------------------------
+        //#Get Category
+        var categoriesSource =
+        {
+            datatype: "json",
+            datafields: [
+                { name: 'id', type: 'number' },
+                { name: 'name', type: 'string' }
+            ],
+            url: '@Url.Content("~/AssCategory/GetCategory")'
+        };
+        var categoriesAdapter = new $.jqx.dataAdapter(categoriesSource, {
+            autoBind: true
+        });
+
+        //#Get Location
+        var locationsSource =
+        {
+            datatype: "json",
+            datafields: [
+                { name: 'id', type: 'number' },
+                { name: 'name', type: 'string' }
+            ],
+            url: '@Url.Content("~/AssLocation/GetLocation")'
+        };
+        var locationsAdapter = new $.jqx.dataAdapter(locationsSource, {
+            autoBind: true
+        });
+
+        // prepare the data
+        var data = {};
+        var generaterow = function (i) {
+            var row = {};
+            row["no"] = i;
+            row["cat_id"] = 0;
+            row["location_id"] = "0";
+            row["descs"] = "";
+            row["due_date"] = new Date();
+            return row;
+        }
+        for (var i = 0; i < 10; i++) {
+            var row = generaterow(i);
+            data[i] = row;
+        }
+        var source =
+        {
+            localdata: data,
+            datatype: "local",
+            datafields:
+            [
+                { name: 'no', type: 'number' },
+                { name: 'Category', value: 'cat_id', values: { source: categoriesAdapter.records, value: 'id', name: 'name' } },
+                { name: 'cat_id', type: 'number' },
+                { name: 'Location', value: 'location_id', values: { source: locationsAdapter.records, value: 'id', name: 'name' } },
+                { name: 'location_id', type: 'number' },
+                { name: 'descs', type: 'string' },
+                { name: 'due_date', type: 'date' }
+            ],
+            addrow: function (rowid, rowdata, position, commit) {
+                // synchronize with the server - send insert command
+                // call commit with parameter true if the synchronization with the server is successful
+                //and with parameter false if the synchronization failed.
+                // you can pass additional argument to the commit callback which represents the new ID if it is generated from a DB.
+                commit(true);
+            },
+            deleterow: function (rowid, commit) {
+                // synchronize with the server - send delete command
+                // call commit with parameter true if the synchronization with the server is successful
+                //and with parameter false if the synchronization failed.
+                commit(true);
+            },
+            updaterow: function (rowid, rowdata, commit) {
+                commit(true);
+            },
+        };
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        var rownumberrenderer = function (row, columnfield, value, defaulthtml, columnproperties, rowdata) {
+            return row + 1;
+        }
+        // initialize jqxGrid
+        $("#gridDetail").jqxGrid(
+        {
+            width: "100%",
+            height: 350,
+            source: dataAdapter,
+            editable: true,      
+            selectionmode: 'singlerow',
+            editmode: 'selectedrow',
+            showtoolbar: true,
+            rendertoolbar: function (toolbar) {
+                var me = this;
+                var container = $("<div style='margin: 5px;'></div>");
+                toolbar.append(container);
+                container.append('<input id="addrowbutton" type="button" value="Add New Row" />');                
+                $("#addrowbutton").jqxButton();
+                // create new row.
+                $("#addrowbutton").on('click', function () {
+                    var datarow = generaterow();
+                    var commit = $("#gridDetail").jqxGrid('addrow', null, datarow);
+                });
+            },
+            columns: [
+              { text: "#", datafield: "RowIndex", width: 50, cellsrenderer: rownumberrenderer, editable: false, cellsalign : "right" },
+              {
+                  text: 'Category', datafield: 'cat_id', displayfield: 'Category', columntype: 'dropdownlist',
+                  initeditor: function (row, value, editor) {
+                      editrow = row;
+                  },
+                  createeditor: function (row, value, editor) {
+                      editor.jqxDropDownList({ source: categoriesAdapter, displayMember: 'name', valueMember: 'id' });
+                      editor.on('change', function (event) {
+                          if (event.args.type == "keyboard" || event.args.type == "mouse") {
+                              $("#gridDetail").jqxGrid('endcelledit', editrow, "cat_id");
+                          }
+                      });
+                  }, width: 200,
+              },
+              {
+                  text: 'Location', datafield: 'location_id', displayfield: 'Location', columntype: 'dropdownlist',
+                  createeditor: function (row, value, editor) {
+                      editor.jqxDropDownList({ source: locationsAdapter, displayMember: 'name', valueMember: 'id' });
+                  }, width: 200
+              },
+              { text: 'Description', datafield: 'descs' },
+              { text: 'Due Date', datafield: 'due_date', width: 90, columntype: 'datetimeinput', width: 110, align: 'right', cellsalign: 'right', cellsformat: 'd' },
+              {
+                  text: 'Delete', datafield: 'Delete', columntype: 'button', cellsrenderer: function () {
+                      return "Delete";
+                  }, buttonclick: function (row) {
+                      id = $("#gridDetail").jqxGrid('getrowid', row);
+                      var commit = $('#gridDetail').jqxGrid('deleterow', id);
+                      var datarow = generaterow();
+                      commit = $("#gridDetail").jqxGrid('addrow', null, datarow);
+                  }, width : 50
+              },
+            ]
+        });
+
+        $("#gridDetail").on('cellendedit', function (event) {
+            var args = event.args;
+            if (event.args.datafield == "cat_id") {
+                var dtVal = $("#gridDetail").jqxGrid('getcellvalue', args.rowindex, 'due_date');
+                var myDate = new Date();
+                myDate.setDate(new Date($("#inputdt").val()).getDate() + 14);
+                $("#gridDetail").jqxGrid('setcellvalue', args.rowindex, 'due_date', myDate);
+            }
+        });
+
+        $("#dt").jqxDateTimeInput({ formatString: 'yyyy-MM-dd' });
+
+        //#Submit Data ------------------------------------------------------------------------------------
+        $("#submit").click(function () {
+            event.preventDefault();
+            var dtl = { "cat_id": "", "location_id": "", "descs": "", "due_date": "" };
+            var head = { "entity_cd": "", "project_no": "", "lot_no": "", "business_id": "", "cp_name": "", "cp_telp": "", "cp_email": "", "check_date": "", "contractor_id": "", "descs": "", "ass_complaint_dtl": [] };
+
+            head.entity_cd = $("#entCd").val();
+            head.project_no = $("#projectNo").val();
+            head.lot_no = $("#lotNo").val();
+            head.business_id = $("#businessId").val();
+            head.cp_name = $("#cp_name").val();
+            head.cp_telp = $("#cp_telp").val();
+            head.cp_email = $("#cp_email").val();
+            head.check_date = $("#inputdt").val();
+            head.contractor_id = $("#cbContractor").val();
+            head.descs = $("#descs").val();
+
+            var rowscount = $("#gridDetail").jqxGrid('getdatainformation').rowscount;
+            for (var i = 0; i < rowscount; i++) {
+                var cat_id = $('#gridDetail').jqxGrid('getcellvalue', i, 'cat_id');
+                var location_id = $('#gridDetail').jqxGrid('getcellvalue', i, 'location_id');
+                var descs = $('#gridDetail').jqxGrid('getcellvalue', i, 'descs');
+                var due_date = $('#gridDetail').jqxGrid('getcellvalue', i, 'due_date');
+                if (cat_id != null && cat_id != "" && cat_id != 0) {
+                    dtl.cat_id = cat_id;
+                    dtl.location_id = location_id;
+                    dtl.descs = descs;
+                    dtl.due_date = due_date;
+                    head.ass_complaint_dtl.push(dtl);
+                    dtl = { "cat_id": "", "location_id": "", "descs": "", "due_date": "" };
+                }
+            }
+
+            $.ajax({
+                url: '@Url.Content("~/Ass/CreateJson")',
+                data: JSON.stringify(head),
+                type: 'POST',
+                contentType: 'application/json;',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success == 1) {
+                        window.location.href = "/Ass/Details/" + result.comp_id;
+                    }
+                    else {
+                        alert(result.ex);
+                    }
+                }
+            });
+        });
+
+        $("#btTest").click(function () {
+            var tempAll = {};            
+            var rowscount = $("#gridDetail").jqxGrid('getdatainformation').rowscount;
+            for (var x = 0; x < rowscount; x++) {
+                var temp = {};
+                temp.cat_id = $('#gridDetail').jqxGrid('getcellvalue', x, 'cat_id');
+                temp.location_id = $('#gridDetail').jqxGrid('getcellvalue', x, 'location_id');
+                temp.descs = $('#gridDetail').jqxGrid('getcellvalue', x, 'descs');
+                tempAll[x] = temp;
+                console.log(temp);
+            }
+            console.log(tempAll);
+        });
+    });
+    </script>
+}
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Complaint</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="col-md-6">
+        <fieldset>
+            <legend>Unit Information</legend>
+            <div class="form-group">
+                <label class="control-label col-md-4">Unit</label>
+                <div class="col-md-6">
+                    <div id="cbLotNo">
+                        <div style="border-color: transparent;" id="gridLotNo"></div>
+                    </div>
+                    @Html.Hidden("entCd")
+                    @Html.Hidden("projectNo")
+                    @Html.Hidden("businessId")
+                    @Html.Hidden("lotNo")
+                    @Html.ValidationMessageFor(model => model.lot_no, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Owner Name</label>
+                <div class="col-md-6">@Html.TextBox("tbOwnerName", "", new { @class = "form-control text-box single-line", @readonly = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Owner Telp</label>
+                <div class="col-md-6">@Html.TextBox("tbOwnerTelp", "", new { @class = "form-control text-box single-line", @readonly = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Owner Email</label>
+                <div class="col-md-6">
+                    @Html.TextBox("tbOwnerEmail", "", new { @class = "form-control text-box single-line", @readonly = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">BAST</label>
+                <div class="col-md-6">
+                    @Html.TextBox("bast", "", new { @class = "form-control text-box single-line", @readonly = "true" })
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="col-md-6">
+        <fieldset>
+            <legend>Complaint Data</legend>
+            <div class="form-group">
+                <label class="control-label col-md-4">CP Name</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.cp_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.cp_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">CP Telp</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.cp_telp, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.cp_telp, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Email</label>
+                <div class="col-md-6">
+                    @Html.TextBox("cp_email", "", new { @class = "form-control text-box single-line" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Checklist Date</label>
+                <div class="col-md-6">
+                    <div id="dt"></div>
+                    @Html.ValidationMessageFor(model => model.check_date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Contractor</label>
+                <div class="col-md-6">
+                    <div id="cbContractor"></div>
+                    @Html.Hidden("contractorId")
+                    @Html.ValidationMessageFor(model => model.contractor_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Description</label>
+                <div class="col-md-6">
+                    @Html.TextArea("descs", new { rows = 3, columns = 40, @class = "form-control" })
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div id="gridDetail"></div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" id="submit" />
+            <input type="button" value="Test" class="btn btn-default" id="btTest" />
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

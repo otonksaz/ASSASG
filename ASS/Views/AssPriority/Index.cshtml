@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ASS.Model.ass_priority>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.audit_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ass_user.username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.audit_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ass_user.username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

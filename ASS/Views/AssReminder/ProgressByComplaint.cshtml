@@ -1,0 +1,165 @@
+﻿@model ASS.Models.ViewProgressDtl
+
+@{
+    ViewBag.Title = "ProgressByComplaint";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $(".table-childRow td").hide();
+
+            $('.table').delegate('.toggle', 'click', function () {
+                $(this).closest('tr').nextUntil('tr:not(.table-childRow)').find('td').toggle();
+                return false;
+            });
+
+            $('.table').delegate('.toggleAll', 'click', function () {
+                $(".table-childRow td").toggle();
+                return false;
+            });
+        });
+    </script>
+}
+
+<h2>Complaint Progress</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            NO.
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_complaint.id)
+        </dd>
+
+        <dt>
+            Project No
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_complaint.project_no)
+        </dd>
+
+        <dt>
+            Unit
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_complaint.lot_no)
+        </dd>
+
+        <dt>
+            Business ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_complaint.business_id)
+        </dd>
+
+        <dt>
+            CP Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_complaint.cp_name)
+        </dd>
+
+        <dt>
+            CP Telp
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_complaint.cp_telp)
+        </dd>
+
+        <dt>
+            Checklist Date
+        </dt>
+
+        <dd>
+            @Model.ass_complaint.check_date.ToString("dd-MM-yyyy")
+        </dd>
+
+        <dt>
+            Contractor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_complaint.cm_contractor.trade)
+        </dd>
+
+        <dt>
+            Controller / Checker
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_complaint.controller_name)
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass_complaint.descs)
+        </dd>
+
+        <dt>
+            Input Date
+        </dt>
+
+        <dd>
+            @Model.ass_complaint.input_date.ToString("dd-MM-yyyy HH:mm:ss")
+        </dd>
+    </dl>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Current Status</th>
+            <th>Last Update</th>
+            <th><a href="#" class="toggleAll"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a></th>
+        @foreach (var item in Model.ass_complaint.ass_complaint_dtl)
+        {
+            <tr>
+                <td>@Html.DisplayFor(a => item.ass_category.name)</td>
+                <td>@Html.DisplayFor(a => item.ass_location.name)</td>
+                <td>@Html.DisplayFor(a => item.descs)</td>
+                <td>@item.due_date.ToString("dd-MM-yyyy")</td>
+                <td>@item.currentStatus</td>
+                <td>@item.currentStatusDate.ToString("dd-MM-yyyy")</td>
+                <td><a href="#" class="toggle"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a></td>
+            </tr>
+    <tr class="table-childRow">
+        <td>&nbsp;</td>
+        <td colspan="6">
+            <table class="table">
+                <tr>
+                    <th>Progress</th>
+                    <th>Date</th>
+                    <th>Remark</th>
+                    <th>By</th>
+                </tr>
+                @foreach (var dtlPg in item.ass_status_update.OrderBy(x => x.status_date))
+                {
+                    <tr>
+                        <td>@dtlPg.ass_status.name</td>
+                        <td>@dtlPg.status_date.ToString("dd-MM-yyyy")</td>
+                        <td>@dtlPg.remark</td>
+                        <td>@dtlPg.ass_user.fullname</td>
+                    </tr>
+                }
+            </table>
+        </td>
+    </tr>
+        }
+    </table>
+
+</div>

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "RekapKomplainKontraktorView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $(".dtpicker").datepicker({
+                autoclose: true,
+                orientation: "top auto",
+                format: "yyyy-mm-dd"
+            });
+
+            $("#btPrint").click(function () {
+                var sDate = $("#tbSDate").val();
+                var eDate = $("#tbEDate").val();
+                window.open('@Url.Content("~/AssReport/RekapKomplainKontraktorPrint?stSDate=")' + sDate + "&stEDate=" + eDate, "Print");
+            });
+        });
+    </script>
+}
+
+<h2>Rekap Komplain per Kontraktor</h2>
+<hr />
+
+<div class="form-inline">
+    <div class="form-group">
+        <label>Periode :</label>
+        @Html.TextBox("tbSDate", null, htmlAttributes: new { @class = "form-control dtpicker" })
+        @Html.TextBox("tbEDate", null, htmlAttributes: new { @class = "form-control dtpicker" })
+        <button class="btn btn-primary" id="btPrint">
+            <span>Show</span>
+        </button>
+    </div>
+</div>

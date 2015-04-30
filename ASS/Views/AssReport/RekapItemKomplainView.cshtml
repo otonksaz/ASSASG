@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "RekapItemKomplainView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            dateChanged = function (ev) {
+                var someDate = new Date($(this).val());
+                someDate.setMonth(someDate.getMonth() + 1);
+                someDate.setDate(someDate.getDate() - 1);
+                $("#tbEDate").datepicker("update", someDate.getFullYear() + "-" + (someDate.getMonth() + 1) + "-" + someDate.getDate());
+            }
+
+            $(".dtpicker").datepicker({
+                autoclose: true,
+                orientation: "top auto",
+                format: "yyyy-mm-dd"
+            });
+
+            $("#tbSDate").change(dateChanged)
+                .on('changeDate', dateChanged);
+
+            var today = new Date();
+            if (today.getDate() <= 20) {
+                var pastDate = new Date();
+                pastDate.setMonth(today.getMonth() - 1);                
+                $("#tbSDate").datepicker("update", pastDate.getFullYear() + "-" + (pastDate.getMonth() + 1) + "-21");
+                $("#tbEDate").datepicker("update", today.getFullYear() + "-" + (today.getMonth() + 1) + "-20");
+            } else {
+                var nextDate = new Date();
+                nextDate.setMonth(today.getMonth() + 1);
+                $("#tbSDate").datepicker("update", today.getFullYear() + "-" + (today.getMonth() + 1) + "-21");
+                $("#tbEDate").datepicker("update", nextDate.getFullYear() + "-" + (nextDate.getMonth() + 1) + "-20");
+            }            
+
+            $("#btPrint").click(function () {
+                var sDate = $("#tbSDate").val();
+                var eDate = $("#tbEDate").val();
+                window.open('@Url.Content("~/AssReport/RekapItemKomplainPrint?stSDate=")' + sDate + "&stEDate=" + eDate, "Print");
+            });
+        });
+    </script>
+}
+
+<h2>Rekap Item Pekerjaan Complain Customer</h2>
+<hr />
+
+<div class="form-inline">
+    <div class="form-group">
+        <label>Periode :</label>
+        @Html.TextBox("tbSDate", null, htmlAttributes: new { @class = "form-control dtpicker" })
+        @Html.TextBox("tbEDate", null, htmlAttributes: new { @class = "form-control dtpicker" })
+        <button class="btn btn-primary" id="btPrint">
+            <span>Show</span>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ASS.Model.ass_complaint_dtl>
+
+@Styles.Render("~/Content/css")
+<style type="text/css">
+        /*.table-input input {display: block; padding: 0; margin: 0; border: 0; width: 100%;}
+        .table-input .td-input {margin: 0; padding: 0;}*/
+        #tblDtl th {
+            padding-left : 8px;
+        }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('#btConfirm').click(function () {
+            var dtl = { "compDtlId": "", "statusId": "", "remark": "" };
+            var head = { "dtl": [] };
+
+            $('input[name^="check"]').each(function (i) {
+                if (this.checked) {
+                    //console.log(i);
+                    //console.log($(this).val());
+                    //console.log($('#nextStatus-'+i).val());
+                    dtl.compDtlId = $(this).val();
+                    dtl.statusId = $('#nextStatus-' + i).val();
+                    dtl.remark = $('#tbRemark-' + i).val();
+                    head.dtl.push(dtl);
+                    dtl = { "id": "", "statusId": "", "remark": "" };
+                }
+            });
+            $("#modalLoading").modal('show');
+            $.ajax({
+                url: '@Url.Content("~/AssStatusUpdate/CreateJson")',
+                data: JSON.stringify(head),
+                type: 'POST',
+                contentType: 'application/json;',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success == 1) {
+                        var row = { "lotNo": "", "busName": "", "busTelp": "", "email": "", "bast":"" };
+                        row.lotNo=$("#tbUnit").val();
+                        row.busName=$("#tbOwnerName").val();
+                        row.busTelp=$("#tbOwnerTelp").val();
+                        row.email=$("#tbOwnerEmail").val();
+                        row.bast = $("#bast").val();
+                        row.entCd = $("#entCd").val();
+                        row.projectNo = $("#projectNo").val();
+                        selectUnit(row);
+
+                        $("#messageResult").html('<div class="alert alert-success" role="alert">'+result.ex+'</div>');
+                    }
+                    else {
+                        alert(result.ex);
+                    }
+                    $("#modalLoading").modal('hide');
+                }
+            });
+        });
+
+        $("#checkAll").click(function () {
+            $('input[name^="check"]').each(function () {
+                $(this).prop('checked', $('#checkAll').is(':checked'));
+            });
+        });
+    });
+</script>
+
+<table class="table table-bordered table-condensed" id="tblDtl">
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="checkAll" /></th>
+            <th width="50">Complaint Code</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Current Status</th>
+            <th>Next Status</th>
+            <th>Remark</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int ind = 0;}
+        @foreach (ASS.Model.ass_complaint_dtl dtl in Model)
+        {
+            <tr>
+                <td><input type="checkbox" name="check[]" value="@dtl.id" /></td>
+                <td>@dtl.comp_id</td>
+                <td>@dtl.ass_category.name</td>
+                <td>@dtl.ass_location.name</td>
+                <td>@dtl.descs</td>
+                <td>@dtl.due_date.ToString("yyyy-MM-dd")</td>
+                <td>@dtl.ass_status.name</td>
+                <td>
+                    <select name="nextStatus[]" class="form-control" id="nextStatus-@ind">
+                        @foreach (ASS.Model.ass_status snext in dtl.nextStatus)
+                        {
+                            <option value="@snext.id" class="form-control">@snext.name</option>
+                        }
+                    </select>
+                </td>
+                <td>@Html.TextArea("tbRemark[]", new { @id = "tbRemark-" + ind, @class = "form-control", rows = "1" })</td>
+            </tr>
+            ind++;
+        }
+    </tbody>
+</table>
+<button type="button" class="btn btn-primary" id="btConfirm">Next Process</button>
+@Scripts.Render("~/bundles/bootstrap")

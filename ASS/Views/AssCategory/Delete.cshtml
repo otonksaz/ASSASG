@@ -1,0 +1,47 @@
+﻿@model ASS.Model.ass_category
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Category</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descs)
+        </dd>
+
+        <dt>
+            Work Duration
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.work_duration)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

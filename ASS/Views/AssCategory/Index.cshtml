@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ASS.Model.ass_category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Category</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Category Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Work Duration
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.work_duration) day(s)
+        </td>
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id = item.id }, htmlAttributes: new { @class = "glyphicon glyphicon-edit" }) 
+            @Html.ActionLink(" ", "Details", new { id = item.id }, htmlAttributes: new { @class = "glyphicon glyphicon-list" }) 
+            @Html.ActionLink(" ", "Delete", new { id = item.id }, htmlAttributes: new { @class = "glyphicon glyphicon-trash" })
+        </td>
+    </tr>
+}
+
+</table>

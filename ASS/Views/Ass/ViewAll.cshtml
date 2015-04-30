@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "ViewAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script type="text/javascript">
+    function dateFormatter(value, row) {
+        console.log(value);
+        var myDate = new Date(parseInt(value.substr(6)));
+        return myDate.getDate() + "-" + (myDate.getMonth() + 1) + "-" + myDate.getFullYear();
+        //return "<i>"+ value +"</i>";
+    }
+
+    function operateFormatter(value, row, index) {
+        return [
+            '<a class="edit ml10" href="javascript:void(0)" title="Edit">',
+                '<i class="glyphicon glyphicon-list"></i>',
+            '</a> ',
+            '<a class="print ml10" href="javascript:void(0)" title="Print">',
+                '<i class="glyphicon glyphicon-print"></i>',
+            '</a>'
+        ].join('');
+    }
+
+    window.operateEvents = {
+        'click .edit': function (e, value, row, index) {
+            window.location.href = '@Url.Content("~/AssReminder/ProgressByComplaint/?id=")' + row.id;
+        },
+        'click .print': function (e, value, row, index) {
+            window.open('@Url.Content("~/AssReport/printOut/?id=")' + row.id, "Print");
+        }
+    };
+
+    function responseHandler(res) {
+        return res.data;
+    }
+
+    $(function () {
+        var table = $('#datatable').DataTable({
+            "pageLength": 25,
+            "ajax": '@Url.Content("~/Ass/GetAllComplaints")',
+            "columns": [
+                { "data": "id" },
+                { "data": "lotNo" },
+                { "data": "busName" },
+                { "data": "busTelp" },
+                { "data": "email" },
+                {
+                    "data": "checkDate",
+                    "render": function (data) {
+                        var date = new Date(parseInt(data.substr(6)));
+                        var month = date.getMonth() + 1;
+                        return date.getFullYear() + "-" + (month.length > 1 ? month : "0" + month) + "-" + date.getDate();
+                    }
+                },
+                { "data": "contractorName" },
+                {
+                    "data": null,
+                    "orderable": false,
+                    "defaultContent": '<a class="dtl ml10" href="javascript:void(0)" title="Detail"><i class="glyphicon glyphicon-list"></i></a> <a class="print ml10" href="javascript:void(0)" title="Print"><i class="glyphicon glyphicon-print"></i></a>'
+                }
+            ]
+        });
+
+        $('#datatable tbody').on('click', '.dtl', function () {
+            var row = table.row($(this).parents('tr')).data();
+            window.location.href = '@Url.Content("~/AssReminder/ProgressByComplaint/?id=")' + row.id;
+        });
+
+        $('#datatable tbody').on('click', '.print', function () {
+            var row = table.row($(this).parents('tr')).data();
+            window.open('@Url.Content("~/AssReport/printOut/?id=")' + row.id, "Print");
+        });
+    });
+    </script>
+}
+
+<h2>All Complaint</h2>
+<hr />
+
+@*<table id="events-table" data-toggle="table" data-url="@Url.Content("~/Ass/GetAllComplaints")" data-cache="false"
+       data-height="450" data-search="true" data-pagination="true" data-show-columns="true"
+       data-click-to-select="true" data-single-select="true" data-response-handler="responseHandler">
+    <thead>
+        <tr>
+            <th data-field="id">#</th>
+            <th data-field="lotNo" data-sortable="true">Unit</th>
+            <th data-field="busId">Business ID</th>
+            <th data-field="busName">Business Name</th>
+            <th data-field="busTelp">Telp</th>
+            <th data-field="bast">BAST</th>
+            <th data-field="descs">Description</th>
+            <th data-field="checkDate" data-formatter="dateFormatter">Checklist Date</th>
+            <th data-field="contractorName">Contractor</th>
+            <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">###</th>
+        </tr>
+    </thead>
+</table>*@
+<table class="table table-bordered table-condensed" id="datatable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Unit</th>
+            <th>Business Name</th>
+            <th>Telp</th>
+            <th>Email</th>
+            <th>Checklist Date</th>
+            <th>Contractor</th>
+            <th>###</th>
+        </tr>
+    </thead>
+</table>

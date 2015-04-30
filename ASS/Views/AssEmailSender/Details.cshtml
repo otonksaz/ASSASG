@@ -1,0 +1,91 @@
+﻿@model ASS.Model.ass_email_sender
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ass_email_sender</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ent_cd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ent_cd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.url_logo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.url_logo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ent_descs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ent_descs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ent_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ent_address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ttd_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ttd_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ttd_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ttd_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_template)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_template)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9EED7D77-8B54-482A-9E68-95A09175F519}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ASS.Model</RootNamespace>
+    <AssemblyName>ASS.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ass_category.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_complaint.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_complaint_dtl.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_complaint_mail.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_email_sender.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_extends.cs" />
+    <Compile Include="ass_location.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_migrate_closing.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_migrate_lastmonth.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_priority.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_reminder.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_status.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_status_flow.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_status_update.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ass_user.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cf_business.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cm_contractor.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pl_project.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pm_lot.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pm_lot_contractor.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pm_tenancy.cs">
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PomModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PomModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PomModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PomModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PomModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PomModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="PomModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PomModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="PomModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PomModel.edmx</DependentUpon>
+      <LastGenOutput>PomModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="PomModel.edmx.diagram">
+      <DependentUpon>PomModel.edmx</DependentUpon>
+    </None>
+    <None Include="PomModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PomModel.edmx</DependentUpon>
+      <LastGenOutput>PomModel.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

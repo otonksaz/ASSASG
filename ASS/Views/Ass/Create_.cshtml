@@ -1,0 +1,343 @@
+﻿@model ASS.Model.ass_complaint
+@{
+    ViewBag.Title = "Create_";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var today = new Date();
+            var stDay = today.getDate().toString().length == 1 ? "0" + today.getDate() : today.getDate();
+            var stMonth = today.getMonth().toString().length == 1 ? "0" + today.getMonth() : today.getMonth();
+
+            $(".dtpicker").datepicker({
+                autoclose: true,
+                orientation: "top auto",
+                format: "yyyy-mm-dd"
+            });
+
+            $(".dtpicker").datepicker("update", new Date());
+
+            function selectUnit(row) {
+                $("#tbOwnerName").val(row.busName);
+                $("#tbOwnerTelp").val(row.busTelp);
+                $("#tbOwnerEmail").val(row.email);
+
+                $("#cp_name").val(row.busName);
+                $("#cp_telp").val(row.busTelp);
+                $("#bast").val(row.bast);
+                $("#cp_email").val(row.email);
+                $("#entCd").val(row.entCd);
+                $("#projectNo").val(row.projectNo);
+                $("#businessId").val(row.busId);
+                $("#lotNo").val(row.lotNo);
+                $("#tbUnit").val(row.lotNo);
+
+                $("#myModal").modal('hide');
+            }
+
+            function responseHandler(res) {
+                return res.data;
+            }
+            
+            var table = $('#datatable').DataTable({
+                "pageLength": 10,
+                "ajax": '@Url.Content("~/PMTenancy/getlot")',
+                "columns": [
+                    { "data": null },
+                    { "data": "lotNo" },
+                    { "data": "busId" },
+                    { "data": "busName" },
+                    { "data": "busTelp" },
+                    { "data": "bast" }
+                ]
+            });
+
+            $('#events-table').bootstrapTable({
+            }).on('dbl-click-row.bs.table', function (e, row, $element) {
+                selectUnit(row);
+            });
+
+            $("#btSelect").click(function () {
+                selectUnit($("#events-table").bootstrapTable('getSelections')[0]);
+            });
+
+            $("#submit").click(function () {
+                event.preventDefault();
+                var dtl = { "cat_id": "", "location_id": "", "descs": "", "due_date": "" };
+                var head = { "entity_cd": "", "project_no": "", "lot_no": "", "business_id": "", "cp_name": "", "cp_telp": "", "cp_email": "", "check_date": "", "contractor_id": "", "controller_name" : "", "descs": "", "ass_complaint_dtl": [] };
+
+                head.entity_cd = $("#entCd").val();
+                head.project_no = $("#projectNo").val();
+                head.lot_no = $("#lotNo").val();
+                head.business_id = $("#businessId").val();
+                head.cp_name = $("#cp_name").val();
+                head.cp_telp = $("#cp_telp").val();
+                head.cp_email = $("#cp_email").val();
+                head.check_date = $("#check_date").val();
+                head.contractor_id = $("#contractor_id").val();
+                head.controller_name = $("#controller_name").val();
+                head.descs = $("#descs").val();
+
+                $("#tblDtl tr").each(function () {
+                    var cat_id = $(this).find(".cbcategory").val();
+                    var location_id = $(this).find(".cblocation").val();
+                    var descs = $(this).find(".tbremark").val();
+                    var due_date = $(this).find(".dtpicker").val();
+                    if (cat_id != null && cat_id != "" && cat_id != 0) {
+                        dtl.cat_id = cat_id;
+                        dtl.location_id = location_id;
+                        dtl.descs = descs;
+                        dtl.due_date = due_date;
+                        head.ass_complaint_dtl.push(dtl);
+                        dtl = { "cat_id": "", "location_id": "", "descs": "", "due_date": "" };
+                    }
+                });
+
+                $("#modalLoading").modal('show');
+                $.ajax({
+                    url: '@Url.Content("~/Ass/CreateJson")',
+                    data: JSON.stringify(head),
+                    type: 'POST',
+                    contentType: 'application/json;',
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.success == 1) {
+                            window.location.href = '@Url.Content("~/Ass/Details/?id=")' + result.comp_id;
+                        }
+                        else {
+                            alert(result.ex);
+                        }
+                        $("#modalLoading").modal('hide');
+                    }
+                });
+            });
+
+            delClick = function (button) {
+                var tr = $(button).closest('tr')[0];
+                tr.remove();
+                resetRow();
+            }
+
+            addClick = function (button) {
+                var row = $("#tblDtl tr:last").clone();
+                $("#tblDtl tr:last").after(row);
+                resetRow();
+                $(".dtpicker").datepicker({
+                    autoclose: true,
+                    orientation: "top auto",
+                    format: "yyyy-mm-dd"
+                });
+            }
+
+            updateDueDateRowBla = function (combo) {
+                if ($(combo).val() != 0) {
+                    $.ajax({
+                        url: '@Url.Content("~/AssCategory/GetWorkDurationById?id=")' + $(combo).val(),                        
+                        type: 'POST',
+                        contentType: 'application/json;',
+                        dataType: 'json',
+                        success: function (result) {
+                            console.log(result);
+                            if (result.data != null) {                                
+                                var tr = $(combo).closest('tr')[0];
+                                var someDate = new Date($("#check_date").val());
+                                someDate.setDate(someDate.getDate() + result.data);
+                                $(tr).find(".dtpicker").datepicker("update",someDate.getFullYear() + "-" + (someDate.getMonth() + 1) + "-" + someDate.getDate());
+                            }
+                        }
+                    });
+                }
+            }
+
+            resetRow = function () {
+                $("#tblDtl tr").each(function () {
+                    var idNumber = this.rowIndex - 1;
+                    $(this).find(".tdno").html(this.rowIndex);
+                    $(this).find(".cbcategory").attr('id', 'category_id-' + idNumber);
+                    $(this).find(".cblocation").attr('id', 'location_id-' + idNumber);
+                    $(this).find(".tbremark").attr('id', 'tbRemark-' + idNumber);
+                    $(this).find(".dtpicker").attr('id', 'due_date-' + idNumber);
+                    
+                    var rows = $("#tblDtl tr:last")[0].rowIndex;
+                    if (this.rowIndex != rows) {
+                        $(this).find(".btnAdd").hide();
+                    } else {
+                        $(this).find(".btnAdd").show();
+                    }
+
+                    if (rows == 1) {
+                        $(this).find(".btnDelete").hide();
+                    } else {
+                        $(this).find(".btnDelete").show();
+                    }
+                });
+            }
+
+            resetRow();
+        });
+    </script>
+}
+
+@Html.AntiForgeryToken()
+
+<h2>Create</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <label class="control-label col-md-4">Unit</label>
+        <div class="col-lg-8">
+            <div class="input-group">
+                <input type="text" id="tbUnit" name="tbUnit" class="form-control" placeholder="">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">...</button>
+                </span>
+                @Html.Hidden("entCd")
+                @Html.Hidden("projectNo")
+                @Html.Hidden("businessId")
+                @Html.Hidden("lotNo")
+            </div>
+        </div>
+
+        <label class="control-label col-md-4">Owner Name</label>
+        <div class="col-lg-8">
+            @Html.TextBox("tbOwnerName", "", new { @class = "form-control", @readonly = "true" })
+        </div><!-- /.col-lg-6 -->
+
+        <label class="control-label col-md-4">Owner Telp</label>
+        <div class="col-lg-8">
+            @Html.TextBox("tbOwnerTelp", "", new { @class = "form-control", @readonly = "true" })
+        </div><!-- /.col-lg-6 -->
+
+        <label class="control-label col-md-4">Owner Email</label>
+        <div class="col-lg-8">
+            @Html.TextBox("tbOwnerEmail", "", new { @class = "form-control", @readonly = "true" })
+        </div><!-- /.col-lg-6 -->
+
+        <label class="control-label col-md-4">BAST</label>
+        <div class="col-lg-8">
+            @Html.TextBox("bast", "", new { @class = "form-control", @readonly = "true" })
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label class="control-label col-md-4">CP Name</label>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.cp_name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cp_name, "", new { @class = "text-danger" })
+        </div>
+
+        <label class="control-label col-md-4">CP Telp</label>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.cp_telp, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cp_telp, "", new { @class = "text-danger" })
+        </div>
+
+        <label class="control-label col-md-4">Email</label>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.cp_email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cp_telp, "", new { @class = "text-danger" })
+        </div>
+
+        <label class="control-label col-md-4">Checklist Date</label>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" id="check_date" name="check_date" class="form-control dtpicker" placeholder="" aria-describedby="basic-addon2">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-gift"></span></span>
+            </div>
+            @Html.ValidationMessageFor(model => model.check_date, "", new { @class = "text-danger" })
+        </div>
+
+        <label class="control-label col-md-4">Contractor</label>
+        <div class="col-md-6">
+            @Html.DropDownList("contractor_id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.contractor_id, "", new { @class = "text-danger" })
+        </div>
+
+        <label class="control-label col-md-4">PIC</label>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.controller_name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.controller_name, "", new { @class = "text-danger" })
+        </div>
+
+        <label class="control-label col-md-4">Description</label>
+        <div class="col-md-6">
+            @Html.TextArea("descs", new { rows = 3, columns = 40, @class = "form-control" })
+        </div>
+    </div>
+</div>
+<hr />
+<!--Tabel Detail-->
+<table class="table table-condensed" id="tblDtl">
+    <thead>
+        <tr>
+            <th width="50">#</th>
+            <th width="200">Category</th>
+            <th width="200">Location</th>
+            <th>Description</th>
+            <th width="150">Due Date</th>
+            <th>####</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int x = 0; x < 10; x++) {
+        <tr>
+            <td><span class="tdno">@(x + 1)</span></td>
+            <td>@Html.DropDownList("category_id", null, htmlAttributes: new { @class = "form-control cbcategory", @name = "category_id[]", @id = "category_id-" + x, @onchange = "updateDueDateRowBla(this)" })</td>
+            <td>@Html.DropDownList("location_id", null, htmlAttributes: new { @class = "form-control cblocation", @name = "location_id[]", @id = "location_id-" + x })</td>
+            <td>@Html.TextArea("tbRemark[]", new { @id = "tbRemark-" + x, @class = "form-control tbremark", rows = "1" })</td>
+            <td>
+                <div class="input-group">
+                    <input type="text" id="due_date-@x" name="due_date[]" class="form-control dtpicker" placeholder="" aria-describedby="basic-addon2">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-gift"></span></span>
+                </div>
+            </td>
+            <td>
+                <button type="button" class="btn btn-default btnDelete" aria-label="Left Align" onclick="delClick(this)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>                
+                <button type="button" class="btn btn-default btnAdd" aria-label="Left Align" onclick="addClick(this)">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<button type="button" class="btn btn-primary" id="submit">Save</button>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Select Unit</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-condensed" id="datatable">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Unit</th>
+                            <th>Business ID</th>
+                            <th>Business Name</th>
+                            <th>Telp</th>
+                            <th>BAST</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btSelect">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

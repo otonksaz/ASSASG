@@ -1,0 +1,10 @@
+D:\NET\ASS\ASS.Model\bin\Debug\ASS.Model.dll.config
+D:\NET\ASS\ASS.Model\bin\Debug\ASS.Model.dll
+D:\NET\ASS\ASS.Model\bin\Debug\ASS.Model.pdb
+D:\NET\ASS\ASS.Model\bin\Debug\EntityFramework.dll
+D:\NET\ASS\ASS.Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\NET\ASS\ASS.Model\bin\Debug\EntityFramework.xml
+D:\NET\ASS\ASS.Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\NET\ASS\ASS.Model\obj\Debug\ASS.Model.dll
+D:\NET\ASS\ASS.Model\obj\Debug\ASS.Model.pdb
+D:\NET\ASS\ASS.Model\obj\Debug\ASS.Model.csprojResolveAssemblyReference.cache

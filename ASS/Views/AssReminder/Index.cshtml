@@ -1,0 +1,113 @@
+﻿@model ASS.Models.ViewReminderBase
+
+@{
+    ViewBag.Title = "Reminder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#tblProgress tr").click(function () {
+                var rowIndex = this.rowIndex;
+                if (rowIndex == 0) {
+                    return;
+                }
+                else {
+                    var progressId = $("#proId-" + rowIndex).val();
+                    window.location.href = '@Url.Content("~/AssReminder/ReminderUnitProgress?idProgress=")' + progressId;
+                }
+            });
+
+            $(".tblReminder tr").click(function () {
+                var rowIndex = this.rowIndex;
+                if (rowIndex == 0) {
+                    return;
+                }
+                else {
+                    var remId = $(this).find(".remId").val();
+                    window.location.href = '@Url.Content("~/AssReminder/ReminderUnit?remId=")' + remId;
+                }
+            });
+
+            //$("#tblDtl").html('<img src="/Content/images/loader-small.gif" />Loading...');
+            //$("#tblDtl").load('@Url.Content("~/AssReminder/ProgressDays/")');
+        });
+    </script>
+}
+
+<h2>Home</h2>
+<hr />
+
+<br />
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Progress</div>
+
+    <table class="table table-hover table-bordered" id="tblProgress">
+        <tr>
+            <th width="50%">Description</th>
+            <th width="25%">Unit</th>
+            <th width="25%">Complaint</th>
+        </tr>
+        <tbody>
+            @{
+                int no = 1;
+                string classes = "";
+            }
+            @foreach (ASS.Models.ViewReminder dtl in Model.reminderProgress)
+            {
+                classes = dtl.progressId == 0 ? "class=alert-danger" : "";
+                <tr @classes>
+                    <td>
+                        <input type="hidden" id="proId-@no" value="@dtl.progressId" />
+                        @dtl.descs
+                    </td>
+                    <td>@dtl.countUnit</td>
+                    <td>@dtl.countProgress</td>
+                </tr>
+                no++;
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+
+@foreach (var reminderDaysHead in Model.reminderDaysHead)
+{
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">@reminderDaysHead.title</div>
+
+        <table class="table table-hover table-bordered tblReminder">
+            <tr>
+                <th width="50%">Description</th>
+                <th width="25%">Unit</th>
+                <th width="25%">Complaint</th>
+            </tr>
+            <tbody>
+                @{
+                    no = 1;
+                    classes = "";
+                }
+                @foreach (var dtl in reminderDaysHead.reminderDays)
+                {
+                    if (dtl.countUnit > 0)
+                    {
+                        classes = dtl.classes != null && dtl.classes != "" ? "class=" + dtl.classes : "";
+                        <tr @classes>
+                            <td>
+                                <input type="hidden" class="remId" id="remId-@reminderDaysHead.title-@no" value="@dtl.remId" />
+                                @dtl.descs
+                            </td>
+                            <td>@dtl.countUnit</td>
+                            <td>@dtl.countComplaint</td>
+                        </tr>
+                        no++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <br />
+}

@@ -1,0 +1,128 @@
+﻿@model ASS.Model.ass_complaint
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            NO.
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id)
+        </dd>
+
+        <dt>
+            Project No
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_no)
+        </dd>
+
+        <dt>
+            Unit
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lot_no)
+        </dd>
+
+        <dt>
+            Business ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.business_id)
+        </dd>
+
+        <dt>
+            CP Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cp_name)
+        </dd>
+
+        <dt>
+            CP Telp
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cp_telp)
+        </dd>
+
+        <dt>
+            Checklist Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.check_date)
+        </dd>
+
+        <dt>
+            Contractor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cm_contractor.trade)
+        </dd>
+
+        <dt>
+            PIC
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.controller_name)
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descs)
+        </dd>
+
+        <dt>
+            Input Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.input_date)
+        </dd>
+    </dl>
+
+    <table class="table">
+        <tr>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Due Date</th>
+        </tr>
+        @foreach (var item in Model.ass_complaint_dtl)
+        {
+            <tr>
+                <td>@Html.DisplayFor(a => item.ass_category.name)</td>
+                <td>@Html.DisplayFor(a => item.ass_location.name)</td>
+                <td>@Html.DisplayFor(a => item.descs)</td>
+                <td>@item.due_date.ToString("dd-MM-yyyy")</td>
+            </tr>
+        }
+    </table>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

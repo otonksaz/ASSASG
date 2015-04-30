@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ASS.Model.ass_complaint_dtl>
+@{
+    ViewBag.Title = "ProgressByUnit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<table class="table">
+    <tr>
+        <td><label>Project</label></td>
+        <td>@Model.FirstOrDefault().ass_complaint.project_no</td>
+    </tr>
+    <tr>
+        <td><label>Unit</label></td>
+        <td>@Model.FirstOrDefault().ass_complaint.lot_no</td>
+    </tr>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th width="50">Complaint Code</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Current Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int ind = 0;}
+        @foreach (ASS.Model.ass_complaint_dtl dtl in Model)
+        {
+            <tr>
+                <td>@dtl.comp_id</td>
+                <td>@dtl.ass_category.name</td>
+                <td>@dtl.ass_location.name</td>
+                <td>@dtl.descs</td>
+                <td>@dtl.due_date.ToString("yyyy-MM-dd")</td>
+                <td>@dtl.currentStatus</td>                
+            </tr>
+                        ind++;
+        }
+    </tbody>
+</table>
